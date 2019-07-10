@@ -1,6 +1,3 @@
-#!/bin/bash
-# Sep 18 2018, tqkieu, create file
-
 # Disable colors if stdout is not a tty
 if [ -t 1 ]; then
 	COLOR_TITLE="\\033[1;94m"
