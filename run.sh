@@ -93,12 +93,14 @@ target_setup() {
 	# ScpToTarget "./modules/cp2130/cp2130.ko" "/tmp/yellow_testing/modules"
 
 	# push system test
-	# ScpToTarget "./system/mangOH.$TARGET_TYPE.update" "/tmp/yellow_testing/system"
+	echo -e "${COLOR_TITLE}Pushing Legato system${COLOR_RESET}"
+	ScpToTarget "./system/yellow_factory_test.$TARGET_TYPE.update" "/tmp/yellow_testing/system"
 
 	# push legato test apps
-	echo -e "${COLOR_TITLE}Pushing Legato apps${COLOR_RESET}"
-	ScpToTarget "./apps/YellowTestService.$TARGET_TYPE.update" "/tmp/yellow_testing/apps"
-	ScpToTarget "./apps/YellowTest.$TARGET_TYPE.update" "/tmp/yellow_testing/apps"
+	#echo -e "${COLOR_TITLE}Pushing Legato apps${COLOR_RESET}"
+	# ScpToTarget "./apps/YellowTestService.$TARGET_TYPE.update" "/tmp/yellow_testing/apps"
+	# ScpToTarget "./apps/YellowTest.$TARGET_TYPE.update" "/tmp/yellow_testing/apps"
+
 
 	# # load driver modules
 	# for driver_module in "${install_driver_modules[@]}"
@@ -108,36 +110,40 @@ target_setup() {
 	# done
 
 	# install system
-	# testingSysIndex=$(GetCurrentSystemIndex + 1)
-	# echo -e "${COLOR_ERROR}Installing testing system${COLOR_RESET}"
-	# SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/system/mangOH.$TARGET_TYPE.update"
-	# WaitForSystemToStart $testingSysIndex
+	testingSysIndex=$(($(GetCurrentSystemIndex) + 1))
+	echo -e "${COLOR_ERROR}Installing testing system${COLOR_RESET}"
+	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/system/yellow_factory_test.$TARGET_TYPE.update"
+	WaitForSystemToStart $testingSysIndex
 
 	# install apps
-	if AppExist "YellowTestService"
-	then
-		if ! AppRemove "YellowTestService"
-		then
-			TEST_RESULT="f"
-			echo -e "${COLOR_ERROR}Failed to remove app YellowTestService${COLOR_RESET}"
-		fi
-	fi
-	if AppExist "YellowTest"
-	then
-		if ! AppRemove "YellowTest"
-		then
-			TEST_RESULT="f"
-			echo -e "${COLOR_ERROR}Failed to remove app YellowTest${COLOR_RESET}"
-		fi
-	fi
+	# if AppExist "YellowTestService"
+	# then
+	# 	if ! AppRemove "YellowTestService"
+	# 	then
+	# 		TEST_RESULT="f"
+	# 		echo -e "${COLOR_ERROR}Failed to remove app YellowTestService${COLOR_RESET}"
+	# 	fi
+	# fi
+	# if AppExist "YellowTest"
+	# then
+	# 	if ! AppRemove "YellowTest"
+	# 	then
+	# 		TEST_RESULT="f"
+	# 		echo -e "${COLOR_ERROR}Failed to remove app YellowTest${COLOR_RESET}"
+	# 	fi
+	# fi
 
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
 
-	echo -e "${COLOR_TITLE}Installing app 'YellowTestService'...${COLOR_RESET}"
-	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/apps/YellowTestService.$TARGET_TYPE.update"
-	echo -e "${COLOR_TITLE}Installling app 'YellowTest'...${COLOR_RESET}"
-	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/apps/YellowTest.$TARGET_TYPE.update"
+	# echo -e "${COLOR_TITLE}Installing app 'YellowTestService'...${COLOR_RESET}"
+	# SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/apps/YellowTestService.$TARGET_TYPE.update"
+
+	# echo -e "${COLOR_TITLE}Installling app 'YellowTest'...${COLOR_RESET}"
+	# SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/apps/YellowTest.$TARGET_TYPE.update"
+
+	# echo -e "${COLOR_TITLE}Installling app 'YellowTest'...${COLOR_RESET}"
+	# SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/apps/YellowTest.$TARGET_TYPE.update"
 
 	return 0
 }
@@ -158,31 +164,31 @@ target_start_test() {
 target_cleanup() {
 	echo -e "${COLOR_TITLE}Restoring target${COLOR_RESET}"
 	# remove legato test app
-	if AppExist "YellowTest"
-	then
-		echo -e "${COLOR_TITLE}Installing app 'YellowTest'...${COLOR_RESET}"
-		if ! AppRemove "YellowTest"
-		then
-			TEST_RESULT="f"
-			echo -e "${COLOR_ERROR}Failed to remove app 'YellowTest'${COLOR_RESET}"
-		fi
-	else
-		TEST_RESULT="f"
-		echo -e "${COLOR_ERROR}App 'YellowTest' has not been installed${COLOR_RESET}"
-	fi
+	# if AppExist "YellowTest"
+	# then
+	# 	echo -e "${COLOR_TITLE}Installing app 'YellowTest'...${COLOR_RESET}"
+	# 	if ! AppRemove "YellowTest"
+	# 	then
+	# 		TEST_RESULT="f"
+	# 		echo -e "${COLOR_ERROR}Failed to remove app 'YellowTest'${COLOR_RESET}"
+	# 	fi
+	# else
+	# 	TEST_RESULT="f"
+	# 	echo -e "${COLOR_ERROR}App 'YellowTest' has not been installed${COLOR_RESET}"
+	# fi
 
-	if AppExist "YellowTestService"
-	then
-		echo -e "${COLOR_TITLE}Installing app 'YellowTestService'...${COLOR_RESET}"
-		if ! AppRemove "YellowTestService"
-		then
-			TEST_RESULT="f"
-			echo -e "${COLOR_ERROR}Failed to remove app 'YellowTestService'${COLOR_RESET}"
-		fi
-	else
-		TEST_RESULT="f"
-		echo -e "${COLOR_ERROR}App 'YellowTestService' has not been installed${COLOR_RESET}"
-	fi
+	# if AppExist "YellowTestService"
+	# then
+	# 	echo -e "${COLOR_TITLE}Installing app 'YellowTestService'...${COLOR_RESET}"
+	# 	if ! AppRemove "YellowTestService"
+	# 	then
+	# 		TEST_RESULT="f"
+	# 		echo -e "${COLOR_ERROR}Failed to remove app 'YellowTestService'${COLOR_RESET}"
+	# 	fi
+	# else
+	# 	TEST_RESULT="f"
+	# 	echo -e "${COLOR_ERROR}App 'YellowTestService' has not been installed${COLOR_RESET}"
+	# fi
 
 	# # remove driver modules
 	# for driver_module in "${remove_driver_modules[@]}"
@@ -217,11 +223,11 @@ then
 	echo -e "${COLOR_ERROR}Testing failed${COLOR_RESET}"
 fi
 
-# if ! target_cleanup
-# then
-# 	TEST_RESULT="f"
-# 	echo -e "${COLOR_ERROR}Failed to cleanup target${COLOR_RESET}"
-# fi
+if ! target_cleanup
+then
+	TEST_RESULT="f"
+	echo -e "${COLOR_ERROR}Failed to cleanup target${COLOR_RESET}"
+fi
 
 echo -e "${COLOR_TITLE}Test is finished${COLOR_RESET}"
 EchoPassOrFail $TEST_RESULT
