@@ -363,7 +363,7 @@ write_eeprom() {
 			local eeprom_path="/sys/bus/i2c/devices/4-0050/eeprom"
 		fi
 	fi
-	echo "mangOH Yellow DV3\\x00" > "$eeprom_path"
+	echo "mangOH Yellow DV3\x00" > "$eeprom_path"
 	if [ $? != 0 ]
 	then
 		failure_msg="Failed to write to EEPROM"
@@ -711,15 +711,15 @@ echo '======================================================================='
 
 # automation test
 echo "=== Start automation testing ==="
-# test_automation
-# if [ $? != 0 ]
-# then
-# 	fail_count=$(($fail_count + 1))
-# 	echo "----->               FAILURE           <-----"
-# 	echo "$failure_msg"
-# else
-# 	echo "$test_result"
-# fi
+test_automation
+if [ $? != 0 ]
+then
+	fail_count=$(($fail_count + 1))
+	echo "----->               FAILURE           <-----"
+	echo "$failure_msg"
+else
+	echo "$test_result"
+fi
 echo '======================================================================='
 
 echo '-----------------------------------------------------------------------'
