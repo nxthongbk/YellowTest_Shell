@@ -507,6 +507,8 @@ yellowManualTest_final() {
 #
 #===============================================================================
 test_automation() {
+	echo "Starting Automation Test..." >&2
+
 	PATH=/legato/systems/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin /etc/init.d/syslog stop
 	sleep 2
 	PATH=/legato/systems/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin /etc/init.d/syslog start
@@ -514,11 +516,22 @@ test_automation() {
 	/legato/systems/current/bin/app start YellowTestService	
 	sleep 2
 	/legato/systems/current/bin/app start YellowTest
-	sleep 20
 	
 	log=$(/sbin/logread)
 
 	echo $log >&2
+
+	echo 'Checking message "Check SIM state: PASSED"' >&2
+	/sbin/logread | grep "Check SIM state: PASSED"
+	if [ $? = 0 ]
+	then
+		echo 'Found: "Check SIM state: PASSED"' >&2
+	else
+		/legato/systems/current/bin/app stop YellowTest
+		failure_msg='FAILED: Cannot find: "Check SIM state: PASSED"'
+		test_result="FAILED"
+		return 1
+	fi
 
 	echo 'Checking message "Check signal quality: PASSED"' >&2
 	/sbin/logread | grep "Check signal quality: PASSED"
@@ -532,56 +545,69 @@ test_automation() {
 		return 1
 	fi
 
-	echo 'Checking message "Check main bus I2C: PASSED"' >&2
-	/sbin/logread | grep "Check main bus I2C: PASSED"
+	echo 'Checking message "SDCard Read/Wrire test PASSED"' >&2
+	/sbin/logread | grep "SDCard Read/Wrire test PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "Check main bus I2C: PASSED"' >&2
+		echo 'Found: "SDCard Read/Wrire test PASSED"' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
-		failure_msg='FAILED: Cannot find: "Check main bus I2C: PASSED"'
+		echo '"SDCard Read/Wrire test FAILED"' >&2
+		failure_msg='FAILED: Cannot find: "SDCard Read/Wrire test PASSED"'
 		test_result="FAILED"
 		return 1
 	fi
 
-	echo 'Checking message "Check port 1 hub I2C: PASSED"' >&2
-	/sbin/logread | grep "Check port 1 hub I2C: PASSED"
-	if [ $? = 0 ]
-	then
-		echo 'Found: "Check port 1 hub I2C: PASSED"' >&2
-	else
-		/legato/systems/current/bin/app stop YellowTest
-		failure_msg='FAILED: Cannot find: "Check port 1 hub I2C: PASSED"'
-		test_result="FAILED"
-		return 1
-	fi
+	# echo 'Checking message "Check main bus I2C: PASSED"' >&2
+	# /sbin/logread | grep "Check main bus I2C: PASSED"
+	# if [ $? = 0 ]
+	# then
+	# 	echo 'Found: "Check main bus I2C: PASSED"' >&2
+	# else
+	# 	/legato/systems/current/bin/app stop YellowTest
+	# 	failure_msg='FAILED: Cannot find: "Check main bus I2C: PASSED"'
+	# 	test_result="FAILED"
+	# 	return 1
+	# fi
 
-	echo 'Checking message "Check port 2 hub I2C: PASSED"' >&2
-	/sbin/logread | grep "Check port 2 hub I2C: PASSED"
-	if [ $? = 0 ]
-	then
-		echo 'Found: "Check port 2 hub I2C: PASSED"' >&2
-	else
-		/legato/systems/current/bin/app stop YellowTest
-		failure_msg='FAILED: Cannot find: "Check port 2 hub I2C: PASSED"'
-		test_result="FAILED"
-		return 1
-	fi
+	# echo 'Checking message "Check port 1 hub I2C: PASSED"' >&2
+	# /sbin/logread | grep "Check port 1 hub I2C: PASSED"
+	# if [ $? = 0 ]
+	# then
+	# 	echo 'Found: "Check port 1 hub I2C: PASSED"' >&2
+	# else
+	# 	/legato/systems/current/bin/app stop YellowTest
+	# 	failure_msg='FAILED: Cannot find: "Check port 1 hub I2C: PASSED"'
+	# 	test_result="FAILED"
+	# 	return 1
+	# fi
 
-	echo 'Checking message "Check port 3 hub I2C: PASSED"' >&2
-	/sbin/logread | grep "Check port 3 hub I2C: PASSED"
-	if [ $? = 0 ]
-	then
-		echo 'Found: "Check port 3 hub I2C: PASSED"' >&2
-	else
-		/legato/systems/current/bin/app stop YellowTest
-		failure_msg='FAILED: Cannot find: "Check port 3 hub I2C: PASSED"'
-		test_result="FAILED"
-		return 1
-	fi
+	# echo 'Checking message "Check port 2 hub I2C: PASSED"' >&2
+	# /sbin/logread | grep "Check port 2 hub I2C: PASSED"
+	# if [ $? = 0 ]
+	# then
+	# 	echo 'Found: "Check port 2 hub I2C: PASSED"' >&2
+	# else
+	# 	/legato/systems/current/bin/app stop YellowTest
+	# 	failure_msg='FAILED: Cannot find: "Check port 2 hub I2C: PASSED"'
+	# 	test_result="FAILED"
+	# 	return 1
+	# fi
 
-	echo 'Checking message "Read accelerometer and gyroscope: PASSED"' >&2
-	/sbin/logread | grep "Read accelerometer and gyroscope: PASSED"
+	# echo 'Checking message "Check port 3 hub I2C: PASSED"' >&2
+	# /sbin/logread | grep "Check port 3 hub I2C: PASSED"
+	# if [ $? = 0 ]
+	# then
+	# 	echo 'Found: "Check port 3 hub I2C: PASSED"' >&2
+	# else
+	# 	/legato/systems/current/bin/app stop YellowTest
+	# 	failure_msg='FAILED: Cannot find: "Check port 3 hub I2C: PASSED"'
+	# 	test_result="FAILED"
+	# 	return 1
+	# fi
+
+	echo 'Checking message "Read accelerometer and gyroscope connection: PASSED"' >&2
+	/sbin/logread | grep "Read accelerometer and gyroscope connection: PASSED"
 	if [ $? = 0 ]
 	then
 		echo 'Found: "Read accelerometer and gyroscope: PASSED"' >&2
