@@ -22,7 +22,27 @@ source ./configuration.cfg
 # Libraries poll
 source ./lib/common.sh
 
+prompt_char() {
+	echo $1 >&2
+	read prompt_input
+	echo $(echo $prompt_input | tr 'a-z' 'A-Z')
+}
+
+
+#preparing testing
 echo -e "${COLOR_TITLE}Testing setup${COLOR_RESET}"
+prompt_char "Plug in SIM, microSD card, IoT test card, and expansion-connector test board then press ENTER"
+prompt_char "Connect power jumper across pins 2 & 3 then press ENTER"
+prompt_char "Confirm \"battery protect\" switch is ON (preventing the device from booting on battery power); press ENTER"
+prompt_char "Connect battery press ENTER"
+prompt_char "Switch battery protect switch OFF then press ENTER"
+prompt_char "Verify hardware-controlled tri-colour LED goes green then press ENTER"
+prompt_char "Connect unit to USB hub (both console and main USB) then press ENTER"
+prompt_char "Verify hardware-controlled tri-colour LED goes green then press ENTER"
+prompt_char "Wait for software-controlled tri-colour LED to turn green (ready for manual test)then press ENTER"
+
+echo -e "${COLOR_TITLE}Testing starting${COLOR_RESET}"
+
 
 declare -a install_driver_modules=(
 	"iio"
@@ -64,6 +84,8 @@ declare -a remove_driver_modules=(
 target_setup() {
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
+
+
 	SshToTarget "mkdir -p /tmp/yellow_testing/modules"
 	SshToTarget "mkdir -p /tmp/yellow_testing/apps"
 	SshToTarget "mkdir -p /tmp/yellow_testing/system"
@@ -230,4 +252,5 @@ then
 fi
 
 echo -e "${COLOR_TITLE}Test is finished${COLOR_RESET}"
+prompt_char "Remove power jumper, Disconnect from USB,Disconnect battery,Unplug SIM, SD card, IoT card and expansion-connector test board.Then press ENTER to end testing"
 EchoPassOrFail $TEST_RESULT

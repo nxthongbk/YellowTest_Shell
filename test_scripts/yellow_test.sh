@@ -485,8 +485,25 @@ yellowManualTest_final() {
 		return 1
 	fi
 	
+
 	# 22. Press reset button;
+	echo "Press Reset button" >&2
 	# 23. Confirm hardware-controlled LED goes green;
+
+	local resp=""
+	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
+	do
+		local resp=$(prompt_char "Do you see hardware-controlled LED go green? (Y/N)")
+	done
+
+	if [ "$resp" = "N" ]
+	then
+		failure_msg="Wrong hardware-controlled LED state"
+		test_result="FAILED"
+		return 1
+	fi
+
+	
 	# 24. Remove power jumper;
 	# 25. Disconnect from USB;
 	# 26. Disconnect battery;
@@ -737,7 +754,7 @@ echo '======================================================================='
 
 # automation test
 echo "=== Start automation testing ==="
-test_automation
+#test_automation
 if [ $? != 0 ]
 then
 	fail_count=$(($fail_count + 1))
