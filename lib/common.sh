@@ -10,6 +10,21 @@ TARGET_SSH_OPTS="-p $TARGET_SSH_PORT"
 # maximum connection timeout for both ssh and scp; 10 seconds
 CONNECTION_TIMEOUT=10
 
+
+#=== FUNCTION =============================================================================
+#
+#        NAME: prompt_char
+# DESCRIPTION: Prompt a messgae to console.
+# PARAMETER 1: message
+#
+#==========================================================================================
+prompt_char() {
+    echo $1 >&2
+    read prompt_input
+    echo $(echo $prompt_input | tr 'a-z' 'A-Z')
+}
+
+
 #=== FUNCTION =============================================================================
 #
 #        NAME: SshToTarget

@@ -22,72 +22,41 @@ source ./configuration.cfg
 # Libraries poll
 source ./lib/common.sh
 
-prompt_char() {
-	echo $1 >&2
-	read prompt_input
-	echo $(echo $prompt_input | tr 'a-z' 'A-Z')
-}
-
-
-#preparing testing
-echo -e "${COLOR_TITLE}Testing setup${COLOR_RESET}"
-prompt_char "Plug in SIM, microSD card, IoT test card, and expansion-connector test board then press ENTER"
-prompt_char "Connect power jumper across pins 2 & 3 then press ENTER"
-prompt_char "Confirm \"battery protect\" switch is ON (preventing the device from booting on battery power); press ENTER"
-prompt_char "Connect battery press ENTER"
-prompt_char "Switch battery protect switch OFF then press ENTER"
-prompt_char "Verify hardware-controlled tri-colour LED goes green then press ENTER"
-prompt_char "Connect unit to USB hub (both console and main USB) then press ENTER"
-prompt_char "Verify hardware-controlled tri-colour LED goes green then press ENTER"
-prompt_char "Wait for software-controlled tri-colour LED to turn green (ready for manual test)then press ENTER"
-
-echo -e "${COLOR_TITLE}Testing starting${COLOR_RESET}"
-
-
-declare -a install_driver_modules=(
-	"iio"
-	"iio-kfifo-buf"
-	"iio-triggered-buffer"
-	"cp2130"
-	"opt300x"
-	"expander"
-	# "cypwifi"
-	"bmi160"
-	"bmi160-i2c"
-	"bmc150_magn"
-	"bmc150_magn_i2c"
-	"rtc-pcf85063"
-	"rtc_sync"
-	"bq25601"
-	"bq27xxx_battery"
-	"mangoh_yellow_dev"
-)
-declare -a remove_driver_modules=(
-	"mangoh_yellow_dev"
-	"bmi160-i2c"
-	"bmi160"
-	"bmc150_magn_i2c"
-	"bmc150_magn"
-	"rtc-pcf85063"
-	"rtc_sync"
-	"bq25601"
-	"bq27xxx_battery"
-	"opt300x"
-	"expander"
-	# "cypwifi"
-	"cp2130"
-	"iio-triggered-buffer"
-	"iio-kfifo-buf"
-	"iio"
-)
-
 target_setup() {
+
+	# echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
+	# 1. Plug in SIM, microSD card, IoT test card, and expansion-connector test board;
+	# 2. Connect power jumper across pins 2 & 3;
+	# 3. Confirm "battery protect" switch is ON (preventing the device from booting on battery power);
+	# 4. Connect battery;
+	# 5. Switch "battery protect" switch OFF (allowing the device to boot on battery power);
+
+	prompt_char "Plug in SIM, microSD card, IoT test card, and expansion-connector test board then press ENTER"
+	prompt_char "Connect power jumper across pins 2 & 3 then press ENTER"
+	prompt_char "Confirm \"battery protect\" switch is ON (preventing the device from booting on battery power)then press ENTER"
+	prompt_char "Connect battery press ENTER"
+	prompt_char "Switch battery protect switch OFF then press ENTER"
+
+	local resp=""
+	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
+	do
+		local resp=$(prompt_char "Do you see hardware-controlled tri-colour LED goes green? (Y/N)")
+	done
+	if [ "$resp" = "N" ]
+	then
+		failure_msg="hardware-controlled tri-colour LED has problem"
+		test_result="FAILED"
+		return 1
+	fi
+
+	prompt_char "Connect unit to USB hub (both console and main USB) then press ENTER"
+
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
 
 
-	SshToTarget "mkdir -p /tmp/yellow_testing/modules"
-	SshToTarget "mkdir -p /tmp/yellow_testing/apps"
+	# SshToTarget "mkdir -p /tmp/yellow_testing/modules"
+	# SshToTarget "mkdir -p /tmp/yellow_testing/apps"
 	SshToTarget "mkdir -p /tmp/yellow_testing/system"
 
 	# push test script
@@ -95,31 +64,12 @@ target_setup() {
 	ScpToTarget "./configuration.cfg" "/tmp/yellow_testing/"
 	ScpToTarget "./test_scripts/yellow_test.sh" "/tmp/yellow_testing/"
 
-	# # push test driver modules
-	# echo -e "${COLOR_TITLE}Pushing driver modules${COLOR_RESET}"
-	# ScpToTarget "./modules/mangoh_yellow_dev/mangoh_yellow_dev.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/iio-triggered-buffer/iio-triggered-buffer.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/iio-kfifo-buf/iio-kfifo-buf.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/iio/iio.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/bmi160-i2c/bmi160-i2c.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/bmi160/bmi160.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/bmc150_magn_i2c/bmc150_magn_i2c.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/bmc150_magn/bmc150_magn.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/rtc-pcf85063/rtc-pcf85063.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/rtc_sync/rtc_sync.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/bq25601/bq25601.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/bq27xxx_battery/bq27xxx_battery.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/opt300x/opt300x.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/expander/expander.ko" "/tmp/yellow_testing/modules"
-	# # ScpToTarget "./modules/cypwifi/cypwifi.ko" "/tmp/yellow_testing/modules"
-	# ScpToTarget "./modules/cp2130/cp2130.ko" "/tmp/yellow_testing/modules"
-
 	# push system test
 	echo -e "${COLOR_TITLE}Pushing Legato system${COLOR_RESET}"
 	ScpToTarget "./system/yellow_factory_test.$TARGET_TYPE.update" "/tmp/yellow_testing/system"
 
 	# push legato test apps
-	#echo -e "${COLOR_TITLE}Pushing Legato apps${COLOR_RESET}"
+	# echo -e "${COLOR_TITLE}Pushing Legato apps${COLOR_RESET}"
 	# ScpToTarget "./apps/YellowTestService.$TARGET_TYPE.update" "/tmp/yellow_testing/apps"
 	# ScpToTarget "./apps/YellowTest.$TARGET_TYPE.update" "/tmp/yellow_testing/apps"
 
@@ -133,7 +83,7 @@ target_setup() {
 
 	# install system
 	testingSysIndex=$(($(GetCurrentSystemIndex) + 1))
-	echo -e "${COLOR_ERROR}Installing testing system${COLOR_RESET}"
+	echo -e "${COLOR_TITLE}Installing testing system${COLOR_TITLE}"
 	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/system/yellow_factory_test.$TARGET_TYPE.update"
 	WaitForSystemToStart $testingSysIndex
 
@@ -154,7 +104,7 @@ target_setup() {
 	# 		echo -e "${COLOR_ERROR}Failed to remove app YellowTest${COLOR_RESET}"
 	# 	fi
 	# fi
-
+	#sleep 3
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
 
@@ -171,15 +121,23 @@ target_setup() {
 }
 
 target_start_test() {
+
 	TEST_LOG=$(SshToTarget "/bin/sh /tmp/yellow_testing/yellow_test.sh")
 	echo $TEST_LOG
-	for element in "${TEST_LOG[@]}"
-	do
-		if [ "$element" = "Completed: success" ]
-		then
-			return 0
-		fi 
-	done
+	#for element in "${TEST_LOG[@]}"
+	if [[ ${TEST_LOG[@]} == *"Completed: success"* ]]; then
+	 	return 0
+	fi
+
+
+	# do
+	# 	echo $element
+	# 	if [ "$element" = *"Completed: success"* ]
+	# 	then
+	# 		echo -e "${COLOR_TITLE}Complete success${COLOR_RESET}"
+	# 		return 0
+	# 	fi 
+	# done
 	return 1
 }
 
@@ -242,7 +200,7 @@ fi
 if ! target_start_test
 then
 	TEST_RESULT="f"
-	echo -e "${COLOR_ERROR}Testing failed${COLOR_RESET}"
+	echo -e "${COLOR_ERROR}Testing Failed${COLOR_RESET}"
 fi
 
 if ! target_cleanup
@@ -252,5 +210,8 @@ then
 fi
 
 echo -e "${COLOR_TITLE}Test is finished${COLOR_RESET}"
-prompt_char "Remove power jumper, Disconnect from USB,Disconnect battery,Unplug SIM, SD card, IoT card and expansion-connector test board.Then press ENTER to end testing"
+prompt_char "Remove power jumper"
+prompt_char "Disconnect from USB"
+prompt_char "Disconnect battery,Unplug SIM, SD card, IoT card and expansion-connector test board."
+prompt_char "Then press ENTER to end testing"
 EchoPassOrFail $TEST_RESULT

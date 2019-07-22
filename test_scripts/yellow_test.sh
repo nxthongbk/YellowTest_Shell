@@ -3,6 +3,20 @@
 source /tmp/yellow_testing/configuration.cfg
 echo "MangOH Yellow factory testing"
 
+#=== FUNCTION =============================================================================
+#
+#        NAME: prompt_char
+# DESCRIPTION: Prompt a messgae to console.
+# PARAMETER 1: message
+#
+#==========================================================================================
+prompt_char() {
+    echo $1 >&2
+    read prompt_input
+    echo $(echo $prompt_input | tr 'a-z' 'A-Z')
+}
+
+
 #=== FUNCTION ==================================================================
 #
 #        NAME: triLED
@@ -338,7 +352,7 @@ test_light_sensor() {
 	fi
 
 	failure_msg=""
-	test_result="PASSED"
+	
 	return 0
 }
 
@@ -372,24 +386,10 @@ write_eeprom() {
 	fi
 
 	failure_msg=""
-	test_result="PASSED"
+	
 	return 0
 }
 
-#=== FUNCTION ==================================================================
-#
-#        NAME: prompt_char
-# DESCRIPTION: Request user to input a character for prompt
-# PARAMETER 1: prompt message
-#
-#     RETURNS: user inputed value
-#
-#===============================================================================
-prompt_char() {
-	echo $1 >&2
-	read prompt_input
-	echo $(echo $prompt_input | tr 'a-z' 'A-Z')
-}
 
 #=== FUNCTION ==================================================================
 #
@@ -402,17 +402,20 @@ prompt_char() {
 #
 #===============================================================================
 yellowManualTest_initial() {
-	# 1. Plug in SIM, microSD card, IoT test card, and expansion-connector test board;
-	# 2. Connect power jumper across pins 2 & 3;
-	# 3. Confirm "battery protect" switch is ON (preventing the device from booting on battery power);
-	# 4. Connect battery;
-	# 5. Switch "battery protect" switch OFF (allowing the device to boot on battery power);
-	# 6. Verify hardware-controlled tri-colour LED goes green;
-	# 7. Connect unit to USB hub (both console and main USB);
-	# 8. Wait for software-controlled tri-colour LED to turn green (ready for manual test);
+	# initial generic button
+	generic_button_init
+	if [ $? != 0 ]
+	then
+		echo "Failed to initial Generic Button"
+		exit -1
+	fi
+	sleep 2
+
 	triLED "red" "off"
 	triLED "green" "on"
 	triLED "blue" "off"
+
+	prompt_char "Wait for software-controlled tri-colour LED to turn green (ready for manual test). press ENTER"
 
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
@@ -425,6 +428,7 @@ yellowManualTest_initial() {
 		test_result="FAILED"
 		return 1
 	fi
+
 	failure_msg=""
 	test_result="PASSED"
 	return 0
@@ -484,24 +488,34 @@ yellowManualTest_final() {
 		test_result="FAILED"
 		return 1
 	fi
-	
 
+	#echo "Stop legato ..." >&2
+	#SshToTarget "/legato/systems/current/bin/legato stop"
+
+	echo "/legato/systems/current/bin/app list"
+
+	#SshToTarget "/legat#o/systems/current/bin/app list" stop
 	# 22. Press reset button;
-	echo "Press Reset button" >&2
-	# 23. Confirm hardware-controlled LED goes green;
+	#prompt_char "Press reset button"
+	#echo "Press reset button then check har#dware-controlled LED  go green" >&2
+	# 23. Confirm  rdware-controlled LED goes green;
 
-	local resp=""
-	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
-	do
-		local resp=$(prompt_char "Do you see hardware-controlled LED go green? (Y/N)")
-	done
+	#local resp=""
+	#while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
+	#do
+		#local resp=$(prompt_char "Do you see hardware-controlled LED go green? (Y/N)")
+	#done
 
-	if [ "$resp" = "N" ]
-	then
-		failure_msg="Wrong hardware-controlled LED state"
-		test_result="FAILED"
-		return 1
-	fi
+	#if [ "$resp" = "N" ]
+	#then
+		#failure_msg="Wrong hardware-controlled LED state"
+		#test_result="FAILED"
+		#return 1
+	#fi
+	#echo "Status" >&2
+	#sleep 30
+	#echo "Press reset button then check hardware-controlled LED" >&2
+	#WaitForTargetReboot
 
 	
 	# 24. Remove power jumper;
@@ -509,7 +523,6 @@ yellowManualTest_final() {
 	# 26. Disconnect battery;
 	# 27. Unplug SIM, SD card, IoT card and expansion-connector test board.
 	failure_msg=""
-	test_result="PASSED"
 	return 0
 }
 
@@ -524,21 +537,21 @@ yellowManualTest_final() {
 #
 #===============================================================================
 test_automation() {
-	echo "Starting Automation Test..." >&2
+	echo "Running Automation Test..." >&2
 
 	PATH=/legato/systems/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin /etc/init.d/syslog stop
 	sleep 2
 	PATH=/legato/systems/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin /etc/init.d/syslog start
 	sleep 2
-	/legato/systems/current/bin/app start YellowTestService	
+	/legato/systems/current/bin/app restart YellowTestService	
 	sleep 2
-	/legato/systems/current/bin/app start YellowTest
+	/legato/systems/current/bin/app restart YellowTest
 	
 	log=$(/sbin/logread)
 
-	echo $log >&2
+	#echo $log >&2
 
-	echo 'Checking message "Check SIM state: PASSED"' >&2
+	echo 'Test SIM state"' >&2
 	/sbin/logread | grep "Check SIM state: PASSED"
 	if [ $? = 0 ]
 	then
@@ -550,7 +563,7 @@ test_automation() {
 		return 1
 	fi
 
-	echo 'Checking message "Check signal quality: PASSED"' >&2
+	echo 'Test signal quality' >&2
 	/sbin/logread | grep "Check signal quality: PASSED"
 	if [ $? = 0 ]
 	then
@@ -562,18 +575,56 @@ test_automation() {
 		return 1
 	fi
 
-	echo 'Checking message "SDCard Read/Wrire test PASSED"' >&2
-	/sbin/logread | grep "SDCard Read/Wrire test PASSED"
+	echo 'Test Read Battery Voltage"' >&2
+	/sbin/logread | grep "Read Battery Voltage: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "SDCard Read/Wrire test PASSED"' >&2
+		echo 'Found: "Read Battery Voltage: PASSED"' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
-		echo '"SDCard Read/Wrire test FAILED"' >&2
-		failure_msg='FAILED: Cannot find: "SDCard Read/Wrire test PASSED"'
+		failure_msg='FAILED: Cannot find: "Read Battery Voltage PASSED"'
 		test_result="FAILED"
 		return 1
 	fi
+
+	echo 'Test IOTCardReset"' >&2
+	/sbin/logread | grep "IOTCardReset: PASSED"
+	if [ $? = 0 ]
+	then
+		echo 'Found: "IOTCardReset: PASSED"' >&2
+	else
+		/legato/systems/current/bin/app stop YellowTest
+		failure_msg='FAILED: Cannot find: "IOTCardReset: PASSED"'
+
+		test_result="FAILED"
+		return 1
+	fi
+
+	echo 'Test Read ADC3' >&2
+	/sbin/logread | grep "Read ADC3: PASSED"
+	if [ $? = 0 ]
+	then
+		echo 'Found: "Read ADC3: PASSED"' >&2
+	else
+		/legato/systems/current/bin/app stop YellowTest
+		failure_msg='FAILED: Cannot find: "Read ADC3: PASSED"'
+		test_result="FAILED"
+		return 1
+	fi
+
+
+	# echo 'Checking message "SDCard Read/Wrire test PASSED"' >&2
+	# /sbin/logread | grep "SDCard Read/Wrire test PASSED"
+	# if [ $? = 0 ]
+	# then
+	# 	echo 'Found: "SDCard Read/Wrire test PASSED"' >&2
+	# else
+	# 	/legato/systems/current/bin/app stop YellowTest
+	# 	echo '"SDCard Read/Wrire test FAILED"' >&2
+	# 	failure_msg='FAILED: Cannot find: "SDCard Read/Wrire test PASSED"'
+	# 	test_result="FAILED"
+	# 	return 1
+	# fi
 
 	# echo 'Checking message "Check main bus I2C: PASSED"' >&2
 	# /sbin/logread | grep "Check main bus I2C: PASSED"
@@ -646,13 +697,13 @@ echo "|                          mangOH Yellow Test Program                     
 echo '+------------------------------------------------------------------------------+'
 
 # initial generic button
-generic_button_init
-if [ $? != 0 ]
-then
-	echo "Failed to initial Generic Button"
-	exit -1
-fi
-sleep 1
+# generic_button_init
+# if [ $? != 0 ]
+# then
+# 	echo "Failed to initial Generic Button"
+# 	exit -1
+# fi
+# sleep 1
 
 fail_count=0
 failure_msg=""
@@ -754,7 +805,7 @@ echo '======================================================================='
 
 # automation test
 echo "=== Start automation testing ==="
-#test_automation
+test_automation
 if [ $? != 0 ]
 then
 	fail_count=$(($fail_count + 1))
