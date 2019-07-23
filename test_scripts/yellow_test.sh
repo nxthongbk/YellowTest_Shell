@@ -377,7 +377,11 @@ write_eeprom() {
 			local eeprom_path="/sys/bus/i2c/devices/4-0050/eeprom"
 		fi
 	fi
-	echo "mangOH Yellow DV3\x00" > "$eeprom_path"
+
+	# msg="mangOH Yellow\\nRev: 1.0\\nDate: $time_str\\nMfg: Talon Communications\\0"
+	msg="mangOH Yellow DV3\x00"
+
+	echo -n -e "$msg" > "$eeprom_path"
 	if [ $? != 0 ]
 	then
 		failure_msg="Failed to write to EEPROM"
@@ -409,8 +413,7 @@ yellowManualTest_initial() {
 		echo "Failed to initial Generic Button"
 		exit -1
 	fi
-	sleep 2
-
+	
 	triLED "red" "off"
 	triLED "green" "on"
 	triLED "blue" "off"
@@ -431,6 +434,51 @@ yellowManualTest_initial() {
 
 	failure_msg=""
 	test_result="PASSED"
+	return 0
+}
+
+#=== FUNCTION ==================================================================
+#
+#        NAME: yellowTest_I2CDetect
+# DESCRIPTION: Perform the I2C Detect Address test
+#   PARAMETER: None
+#
+#   RETURNS 1: PASSED/FAILED
+#   RETURNS 2: Failure message
+#
+#===============================================================================
+yellowTest_I2CDetect() {
+	echo "Stop legato ..." >&2
+	/legato/systems/current/bin/legato stop
+	if [ $? = 0 ]
+	then
+		echo 'Stop Legato successflly' >&2
+	else
+		echo 'Unable to stop Legato' >&2
+		return 1
+	fi
+
+	echo "Enable all the ports on the hub" >&2
+	/usr/sbin/i2cset -y 4 0x71 0x0f
+
+	for address in 50 71 08 34 68 76 44 6b 55 3e 51
+	do
+		/usr/sbin/i2cdetect -y -r 4 | grep " $address "
+		if [ $? = 0 ]
+		then
+			echo "Detected I2C address $address" >&2
+		else
+			echo "I2C address $address does not exist" >&2
+			# return 1
+		fi
+	done
+
+	#Start Legato
+	echo "Start legato ..." >&2
+	/legato/systems/current/bin/legato start
+	sleep 10
+
+	failure_msg=""
 	return 0
 }
 
@@ -489,12 +537,6 @@ yellowManualTest_final() {
 		return 1
 	fi
 
-	#echo "Stop legato ..." >&2
-	#SshToTarget "/legato/systems/current/bin/legato stop"
-
-	echo "/legato/systems/current/bin/app list"
-
-	#SshToTarget "/legat#o/systems/current/bin/app list" stop
 	# 22. Press reset button;
 	#prompt_char "Press reset button"
 	#echo "Press reset button then check har#dware-controlled LED  go green" >&2
@@ -549,13 +591,13 @@ test_automation() {
 	
 	log=$(/sbin/logread)
 
-	#echo $log >&2
+	# echo $log >&2
 
-	echo 'Test SIM state"' >&2
+	#echo 'Test SIM state"' >&2
 	/sbin/logread | grep "Check SIM state: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "Check SIM state: PASSED"' >&2
+		echo 'Check SIM state: PASSED' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Check SIM state: PASSED"'
@@ -563,11 +605,11 @@ test_automation() {
 		return 1
 	fi
 
-	echo 'Test signal quality' >&2
+	#echo 'Test signal quality' >&2
 	/sbin/logread | grep "Check signal quality: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "Check signal quality: PASSED"' >&2
+		echo 'Check signal quality: PASSED' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Check signal quality: PASSED"'
@@ -575,11 +617,11 @@ test_automation() {
 		return 1
 	fi
 
-	echo 'Test Read Battery Voltage"' >&2
+	#echo 'Test Read Battery Voltage"' >&2
 	/sbin/logread | grep "Read Battery Voltage: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "Read Battery Voltage: PASSED"' >&2
+		echo 'Read Battery Voltage: PASSED' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Read Battery Voltage PASSED"'
@@ -587,24 +629,23 @@ test_automation() {
 		return 1
 	fi
 
-	echo 'Test IOTCardReset"' >&2
+	#echo 'Test IOTCardReset"' >&2
 	/sbin/logread | grep "IOTCardReset: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "IOTCardReset: PASSED"' >&2
+		echo 'IOTCardReset: PASSED' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "IOTCardReset: PASSED"'
-
 		test_result="FAILED"
 		return 1
 	fi
 
-	echo 'Test Read ADC3' >&2
+	#echo 'Test Read ADC3' >&2
 	/sbin/logread | grep "Read ADC3: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "Read ADC3: PASSED"' >&2
+		echo 'Read ADC3: PASSED' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Read ADC3: PASSED"'
@@ -626,59 +667,11 @@ test_automation() {
 	# 	return 1
 	# fi
 
-	# echo 'Checking message "Check main bus I2C: PASSED"' >&2
-	# /sbin/logread | grep "Check main bus I2C: PASSED"
-	# if [ $? = 0 ]
-	# then
-	# 	echo 'Found: "Check main bus I2C: PASSED"' >&2
-	# else
-	# 	/legato/systems/current/bin/app stop YellowTest
-	# 	failure_msg='FAILED: Cannot find: "Check main bus I2C: PASSED"'
-	# 	test_result="FAILED"
-	# 	return 1
-	# fi
-
-	# echo 'Checking message "Check port 1 hub I2C: PASSED"' >&2
-	# /sbin/logread | grep "Check port 1 hub I2C: PASSED"
-	# if [ $? = 0 ]
-	# then
-	# 	echo 'Found: "Check port 1 hub I2C: PASSED"' >&2
-	# else
-	# 	/legato/systems/current/bin/app stop YellowTest
-	# 	failure_msg='FAILED: Cannot find: "Check port 1 hub I2C: PASSED"'
-	# 	test_result="FAILED"
-	# 	return 1
-	# fi
-
-	# echo 'Checking message "Check port 2 hub I2C: PASSED"' >&2
-	# /sbin/logread | grep "Check port 2 hub I2C: PASSED"
-	# if [ $? = 0 ]
-	# then
-	# 	echo 'Found: "Check port 2 hub I2C: PASSED"' >&2
-	# else
-	# 	/legato/systems/current/bin/app stop YellowTest
-	# 	failure_msg='FAILED: Cannot find: "Check port 2 hub I2C: PASSED"'
-	# 	test_result="FAILED"
-	# 	return 1
-	# fi
-
-	# echo 'Checking message "Check port 3 hub I2C: PASSED"' >&2
-	# /sbin/logread | grep "Check port 3 hub I2C: PASSED"
-	# if [ $? = 0 ]
-	# then
-	# 	echo 'Found: "Check port 3 hub I2C: PASSED"' >&2
-	# else
-	# 	/legato/systems/current/bin/app stop YellowTest
-	# 	failure_msg='FAILED: Cannot find: "Check port 3 hub I2C: PASSED"'
-	# 	test_result="FAILED"
-	# 	return 1
-	# fi
-
-	echo 'Checking message "Read accelerometer and gyroscope connection: PASSED"' >&2
+	#echo 'Checking message "Read accelerometer and gyroscope connection: PASSED"' >&2
 	/sbin/logread | grep "Read accelerometer and gyroscope connection: PASSED"
 	if [ $? = 0 ]
 	then
-		echo 'Found: "Read accelerometer and gyroscope: PASSED"' >&2
+		echo 'Read accelerometer and gyroscope: PASSED' >&2
 	else
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Read accelerometer and gyroscope: PASSED"'
@@ -692,30 +685,15 @@ test_automation() {
 	return 0
 }
 
+# Main Test
 echo '+------------------------------------------------------------------------------+'
 echo "|                          mangOH Yellow Test Program                          |"
 echo '+------------------------------------------------------------------------------+'
-
-# initial generic button
-# generic_button_init
-# if [ $? != 0 ]
-# then
-# 	echo "Failed to initial Generic Button"
-# 	exit -1
-# fi
-# sleep 1
 
 fail_count=0
 failure_msg=""
 test_result=""
 
-# 1. Plug in SIM, microSD card, IoT test card, and expansion-connector test board;
-# 2. Connect power jumper across pins 2 & 3;
-# 3. Confirm "battery protect" switch is ON (preventing the device from booting on battery power);
-# 4. Connect battery;
-# 5. Switch "battery protect" switch OFF (allowing the device to boot on battery power);
-# 6. Verify hardware-controlled tri-colour LED goes green;
-# 7. Connect unit to USB hub (both console and main USB);
 # 8. Wait for software-controlled tri-colour LED to turn green (ready for manual test);
 echo "=== yellowManualTest_initial ==="
 yellowManualTest_initial
@@ -729,8 +707,7 @@ else
 fi
 echo '======================================================================='
 
-
-# 8. Press button and listen for buzzer;
+# 9. Press button and listen for buzzer;
 echo "=== test_buzzer ==="
 test_buzzer
 if [ $? != 0 ]
@@ -767,6 +744,19 @@ else
 fi
 echo '======================================================================='
 
+# EEPROM testing
+echo "=== Start EEPROM testing ==="
+write_eeprom
+if [ $? != 0 ]
+then
+	fail_count=$(($fail_count + 1))
+	echo "----->               FAILURE           <-----"
+	echo "$failure_msg"
+else
+	echo "$test_result"
+fi
+echo '======================================================================='
+
 # 18. Switch cellular antenna selection DIP switch;
 # 19. Press button to finalize the test;
 #     (On-board test software should verify that the correct string has been written to the NFC tag.)
@@ -790,9 +780,9 @@ else
 fi
 echo '======================================================================='
 
-# EEPROM testing
-echo "=== Start EEPROM testing ==="
-write_eeprom
+#test I2C address.
+echo "=== Start I2C testing ==="
+yellowTest_I2CDetect
 if [ $? != 0 ]
 then
 	fail_count=$(($fail_count + 1))
@@ -815,7 +805,7 @@ else
 	echo "$test_result"
 fi
 echo '======================================================================='
-
+# export test result
 echo '-----------------------------------------------------------------------'
 if [ $fail_count = 0 ]
 then
@@ -833,5 +823,6 @@ then
 	exit -1
 fi
 sleep 1
+
 
 exit $fail_count
