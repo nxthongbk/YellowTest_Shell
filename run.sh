@@ -48,9 +48,26 @@ target_setup() {
 		return 1
 	fi
 
+	prompt_char "Press Reset button then press ENTER"
+
+	local resp=""
+	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
+	do
+		local resp=$(prompt_char "Confirm hardware-controlled LED goes green? (Y/N)")
+	done
+	if [ "$resp" = "N" ]
+	then
+		failure_msg="Reset button has problem"
+		test_result="FAILED"
+		return 1
+	fi
+
 	prompt_char "Connect unit to USB hub (both console and main USB) then press ENTER"
 
 	WaitForDevice "Up" "$rbTimer"
+
+
+	ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
 
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
@@ -73,7 +90,6 @@ target_setup() {
 	echo -e "${COLOR_TITLE}Installing testing system${COLOR_TITLE}"
 	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/system/yellow_factory_test.$TARGET_TYPE.update"
 	WaitForSystemToStart $testingSysIndex
-
 	sleep 10
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"

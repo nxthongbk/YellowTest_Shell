@@ -439,6 +439,51 @@ yellowManualTest_initial() {
 
 #=== FUNCTION ==================================================================
 #
+#        NAME: yellowTest_WifiTest
+# DESCRIPTION: Scan WiFi and see dedicated AP
+#   PARAMETER: None
+#
+#   RETURNS 1: PASSED/FAILED
+#   RETURNS 2: Failure message
+#
+#===============================================================================
+yellowTest_WifiScan() {
+	
+	# /legato/systems/current/bin/app start wifi >&2
+	# if [ $? = 0 ]
+	# then
+	# 	echo 'start wifi service' >&2
+	# else
+	# 	echo 'Unable to start service' >&2
+	# 	return 1
+	# fi
+
+	/legato/systems/current/bin/wifi client start >&2
+	if [ $? = 0 ]
+	then
+		echo 'start wifi successflly' >&2
+	else
+		echo 'Unable to start wifi' >&2
+		return 1
+	fi
+
+	
+	/legato/systems/current/bin/wifi client scan | grep "SWI-WLAN"
+	if [ $? = 0 ]
+	then
+		echo "Able to find wifi Accesspoint SWI-WLAN" >&2
+	else
+		echo "Can not wifi wifi Accesspoint" >&2
+		return 1
+	fi
+
+	failure_msg=""
+	return 0
+}
+
+
+#=== FUNCTION ==================================================================
+#
 #        NAME: yellowTest_I2CDetect
 # DESCRIPTION: Perform the I2C Detect Address test
 #   PARAMETER: None
@@ -472,11 +517,6 @@ yellowTest_I2CDetect() {
 			# return 1
 		fi
 	done
-
-	#Start Legato
-	echo "Start legato ..." >&2
-	/legato/systems/current/bin/legato start
-	sleep 10
 
 	failure_msg=""
 	return 0
@@ -599,8 +639,9 @@ test_automation() {
 	then
 		echo 'Check SIM state: PASSED' >&2
 	else
+		echo 'Check SIM state: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
-		failure_msg='FAILED: Cannot find: "Check SIM state: PASSED"'
+		failure_msg='FAILED: Cannot find: "Check SIM state: PASSED"' 
 		test_result="FAILED"
 		return 1
 	fi
@@ -611,6 +652,7 @@ test_automation() {
 	then
 		echo 'Check signal quality: PASSED' >&2
 	else
+		echo 'Check signal quality: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Check signal quality: PASSED"'
 		test_result="FAILED"
@@ -623,8 +665,22 @@ test_automation() {
 	then
 		echo 'Read Battery Voltage: PASSED' >&2
 	else
+		echo 'Read Battery Voltage: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Read Battery Voltage PASSED"'
+		test_result="FAILED"
+		return 1
+	fi
+
+	#echo 'Test IoTCardReadADCs"' >&2
+	/sbin/logread | grep "Check IoTCardReadADCs: PASSED"
+	if [ $? = 0 ]
+	then
+		echo 'Check IoTCardReadADCs: PASSED' >&2
+	else
+		echo 'Check IoTCardReadADCs: FAILED' >&2
+		/legato/systems/current/bin/app stop YellowTest
+		failure_msg='FAILED: Cannot find: "Check IoTCardReadADCs: PASSED"'
 		test_result="FAILED"
 		return 1
 	fi
@@ -635,6 +691,7 @@ test_automation() {
 	then
 		echo 'IOTCardReset: PASSED' >&2
 	else
+		echo 'IOTCardReset: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "IOTCardReset: PASSED"'
 		test_result="FAILED"
@@ -647,6 +704,7 @@ test_automation() {
 	then
 		echo 'Read ADC3: PASSED' >&2
 	else
+		echo 'Read ADC3: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Read ADC3: PASSED"'
 		test_result="FAILED"
@@ -673,6 +731,7 @@ test_automation() {
 	then
 		echo 'Read accelerometer and gyroscope: PASSED' >&2
 	else
+		echo 'Read accelerometer and gyroscope: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "Read accelerometer and gyroscope: PASSED"'
 		test_result="FAILED"
@@ -780,7 +839,36 @@ else
 fi
 echo '======================================================================='
 
-#test I2C address.
+
+# automation test
+# Wifi Test
+echo "=== Start Wifi testing ==="
+yellowTest_WifiScan
+if [ $? != 0 ]
+then
+	fail_count=$(($fail_count + 1))
+	echo "----->               FAILURE           <-----"
+	echo "$failure_msg"
+else
+	echo "$test_result"
+fi
+echo '======================================================================='
+
+
+
+echo "=== Start automation testing ==="
+test_automation
+if [ $? != 0 ]
+then
+	fail_count=$(($fail_count + 1))
+	echo "----->               FAILURE           <-----"
+	echo "$failure_msg"
+else
+	echo "$test_result"
+fi
+echo '======================================================================='
+
+# I2C address test.
 echo "=== Start I2C testing ==="
 yellowTest_I2CDetect
 if [ $? != 0 ]
@@ -793,18 +881,6 @@ else
 fi
 echo '======================================================================='
 
-# automation test
-echo "=== Start automation testing ==="
-test_automation
-if [ $? != 0 ]
-then
-	fail_count=$(($fail_count + 1))
-	echo "----->               FAILURE           <-----"
-	echo "$failure_msg"
-else
-	echo "$test_result"
-fi
-echo '======================================================================='
 # export test result
 echo '-----------------------------------------------------------------------'
 if [ $fail_count = 0 ]
