@@ -468,12 +468,12 @@ yellowTest_WifiScan() {
 	fi
 
 	
-	/legato/systems/current/bin/wifi client scan | grep "SWI-WLAN"
+	/legato/systems/current/bin/wifi client scan | grep "$WIFI_ACCESSPOINT"
 	if [ $? = 0 ]
 	then
-		echo "Able to find wifi Accesspoint SWI-WLAN" >&2
+		echo "Able to find wifi Accesspoint $WIFI_ACCESSPOINT" >&2
 	else
-		echo "Can not wifi wifi Accesspoint" >&2
+		echo "Unable to find wifi Accesspoint $WIFI_ACCESSPOINT" >&2
 		return 1
 	fi
 
@@ -506,7 +506,7 @@ yellowTest_I2CDetect() {
 	echo "Enable all the ports on the hub" >&2
 	/usr/sbin/i2cset -y 4 0x71 0x0f
 
-	for address in 50 71 08 34 68 76 44 6b 55 3e 51
+	for address in 50 71 08 68 76 44 6b 3e 51
 	do
 		/usr/sbin/i2cdetect -y -r 4 | grep " $address "
 		if [ $? = 0 ]
@@ -534,7 +534,7 @@ yellowTest_I2CDetect() {
 #===============================================================================
 yellowManualTest_final() {
 	# 18. Switch cellular antenna selection DIP switch;
-	prompt_char "Switch cellular antenna selection DIP switch then press ENTER"
+	#prompt_char "Switch cellular antenna selection DIP switch then press ENTER"
 	# 19. Press button to finalize the test;
 	echo "Press button to finalize the test" >&2
 	#     (On-board test software should verify that the correct string has been written to the NFC tag.)

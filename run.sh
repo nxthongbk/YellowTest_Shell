@@ -32,9 +32,9 @@ target_setup() {
 
 	prompt_char "Plug in SIM, microSD card, IoT test card, and expansion-connector test board then press ENTER"
 	prompt_char "Connect power jumper across pins 2 & 3 then press ENTER"
-	prompt_char "Confirm \"battery protect\" switch is ON (preventing the device from booting on battery power)then press ENTER"
+	prompt_char "Confirm \"battery protect\" switch is OFF (preventing the device from booting on battery power)then press ENTER"
 	prompt_char "Connect battery press ENTER"
-	prompt_char "Switch battery protect switch OFF then press ENTER"
+	prompt_char "Switch battery protect switch ON then press ENTER"
 
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
@@ -53,7 +53,7 @@ target_setup() {
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
 	do
-		local resp=$(prompt_char "Confirm hardware-controlled LED goes green? (Y/N)")
+		local resp=$(prompt_char "Confirm hardware-controlled LED is off the goes green? (Y/N)")
 	done
 	if [ "$resp" = "N" ]
 	then
@@ -66,8 +66,8 @@ target_setup() {
 
 	WaitForDevice "Up" "$rbTimer"
 
-
-	ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
+	#remove and generate ssh key
+	#ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
 
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
