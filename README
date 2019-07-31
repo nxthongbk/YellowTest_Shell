@@ -1,3 +1,8 @@
 1. Update configration.cfg file for testing target
+	TARGET_IP=192.168.2.2
+	TARGET_TYPE=wp76xx
+	WIFI_ACCESSPOINT=TMA_WIFI
+
 2. Run run.sh
-3. Check the message [PASSED]
+3. Check Result of Testing:
+	If the the message [PASSED]
