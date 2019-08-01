@@ -3,7 +3,7 @@
 	TARGET_TYPE=wp76xx
 	WIFI_ACCESSPOINT=TMA_WIFI
 
-2. Run ./run.sh with root user.
+2. Run ```./run.sh 2>&1 | tee -a test.log``` with root user.
 3. Check Result of Testing in the end of running:
 	If the the message [PASSED] -> Testing is Passed
 	If the the message [FAILED] -> Testing is Failed

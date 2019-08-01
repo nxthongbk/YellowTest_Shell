@@ -20,9 +20,12 @@ CONNECTION_TIMEOUT=10
 #==========================================================================================
 prompt_char() {
     echo $1 >&2
-    #echo $1 >out 2>&2
+    #echo $1 > out.log
+    #echo $1 >out 2>&1
+    #echo $1 2>&1 | tee -a out.log
     read prompt_input
     echo $(echo $prompt_input | tr 'a-z' 'A-Z')
+    #echo $(echo $prompt_input | tr 'a-z' 'A-Z') > out.log
 }
 
 
@@ -1312,7 +1315,20 @@ SetupSecurityUnpackDir()
 GetSysLog()
 {
     mkdir -p ./results/"$1"
-    local time_str=$(date +"%Y-%m-%d-%H:%M")
-    ssh root@$TARGET_IP  '/sbin/logread -f' > ./results/"$1"/syslog_"$time_str" &
+    #local time_str=$(date +"%Y-%m-%d-%H:%M")
+    ssh root@$TARGET_IP  '/sbin/logread -f' > ./results/"$1"/syslog_"$2" &
 }
+
+#=== FUNCTION =============================================================================
+#
+#        NAME: GetSysLog
+# DESCRIPTION: Get System log of module
+#==========================================================================================
+GetTestLog()
+{
+    #local time_str=$(date +"%Y-%m-%d-%H:%M")
+    mv test.log ./results/$1/testlog_"$2"
+}
+
+
 

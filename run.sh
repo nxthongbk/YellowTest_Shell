@@ -43,6 +43,7 @@ target_setup() {
 	done
 	if [ "$resp" = "N" ]
 	then
+		prompt_char "Hardware-controlled tri-colour LED doens't go green. Switch battery protect doesn't work."
 		failure_msg="hardware-controlled tri-colour LED has problem"
 		test_result="FAILED"
 		return 1
@@ -57,6 +58,7 @@ target_setup() {
 	done
 	if [ "$resp" = "N" ]
 	then
+		prompt_char "Reset button has problem."
 		failure_msg="Reset button has problem"
 		test_result="FAILED"
 		return 1
@@ -94,8 +96,10 @@ target_setup() {
 
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
+
+	run_time=$(date +"%Y-%m-%d-%H:%M")
 	imei=$(SshToTarget "/legato/systems/current/bin/cm info imei")
-	GetSysLog $imei
+	GetSysLog $imei $run_time
 
 	return 0
 }
@@ -188,4 +192,5 @@ then
 fi
 
 EchoPassOrFail $TEST_RESULT
-#exit
+
+GetTestLog $imei $run_time
