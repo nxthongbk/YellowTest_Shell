@@ -43,7 +43,7 @@ target_setup() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Hardware-controlled tri-colour LED doens't go green. Switch battery protect doesn't work."
+		echo "Hardware-controlled tri-colour LED doens't go green. Switch battery protect doesn't work." >&2
 		failure_msg="hardware-controlled tri-colour LED has problem"
 		test_result="FAILED"
 		return 1
@@ -58,7 +58,7 @@ target_setup() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Reset button has problem."
+		echo  "Reset button has problem." >&2
 		failure_msg="Reset button has problem"
 		test_result="FAILED"
 		return 1
@@ -177,6 +177,7 @@ if ! target_setup
 then
 	TEST_RESULT="f"
 	echo -e "${COLOR_ERROR}Failed to setup target${COLOR_RESET}"
+	exit
 fi
 
 if ! target_start_test

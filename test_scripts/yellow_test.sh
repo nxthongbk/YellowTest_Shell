@@ -12,7 +12,6 @@ echo "MangOH Yellow factory testing"
 #==========================================================================================
 prompt_char() {
     echo $1 >&2
-    #echo $1 >out 2>&2
     read prompt_input
     echo $(echo $prompt_input | tr 'a-z' 'A-Z')
 }
@@ -206,7 +205,7 @@ test_buzzer() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Buzzer has problem."
+		echo "Buzzer has problem." >&2
 		kill $bgid
 		wait $bgid
 
@@ -325,7 +324,7 @@ test_light_sensor() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Light sensor has problem."
+		echo "Light sensor has problem." >&2
 		failure_msg="Light sensor has problem"
 		test_result="FAILED"
 		return 1
@@ -349,7 +348,7 @@ test_light_sensor() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Light sensor has problem."
+		echo "Light sensor has problem." >&2
 		failure_msg="Light sensor has problem"
 		test_result="FAILED"
 		return 1
@@ -431,7 +430,7 @@ yellowManualTest_initial() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Software-controller LED has problem."
+		echo "Software-controller LED has problem." >&2
 		failure_msg="Software-controller LED has problem"
 		test_result="FAILED"
 		return 1
@@ -619,7 +618,7 @@ yellowManualTest_final() {
 	done
 	if [ "$resp" = "N" ]
 	then
-		prompt_char "Failed to final the test."
+		echo "Failed to final the test." >&2
 		failure_msg="Failed to final the test"
 		test_result="FAILED"
 		return 1

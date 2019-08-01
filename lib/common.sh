@@ -20,12 +20,8 @@ CONNECTION_TIMEOUT=10
 #==========================================================================================
 prompt_char() {
     echo $1 >&2
-    #echo $1 > out.log
-    #echo $1 >out 2>&1
-    #echo $1 2>&1 | tee -a out.log
     read prompt_input
     echo $(echo $prompt_input | tr 'a-z' 'A-Z')
-    #echo $(echo $prompt_input | tr 'a-z' 'A-Z') > out.log
 }
 
 
@@ -1321,7 +1317,7 @@ GetSysLog()
 
 #=== FUNCTION =============================================================================
 #
-#        NAME: GetSysLog
+#        NAME: GetTestLog
 # DESCRIPTION: Get System log of module
 #==========================================================================================
 GetTestLog()
