@@ -610,7 +610,7 @@ yellowManualTest_final() {
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
 	do
-		local resp=$(prompt_char "Do you see software-controlled LED go white? (Y/N)")
+		local resp=$(prompt_char "Do you see software-controlled LED goes white? (Y/N)")
 	done
 	if [ "$resp" = "N" ]
 	then
@@ -623,7 +623,7 @@ yellowManualTest_final() {
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
 	do
-		local resp=$(prompt_char "Do you see hardware-controlled LED go yellow? (Y/N)")
+		local resp=$(prompt_char "Do you see hardware-controlled LED goes yellow? (Y/N)")
 	done
 
 	if [ "$resp" = "N" ]
@@ -634,28 +634,7 @@ yellowManualTest_final() {
 	fi
 
 	# 22. Press reset button;
-	#prompt_char "Press reset button"
-	#echo "Press reset button then check har#dware-controlled LED  go green" >&2
 	# 23. Confirm  rdware-controlled LED goes green;
-
-	#local resp=""
-	#while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
-	#do
-		#local resp=$(prompt_char "Do you see hardware-controlled LED go green? (Y/N)")
-	#done
-
-	#if [ "$resp" = "N" ]
-	#then
-		#failure_msg="Wrong hardware-controlled LED state"
-		#test_result="FAILED"
-		#return 1
-	#fi
-	#echo "Status" >&2
-	#sleep 30
-	#echo "Press reset button then check hardware-controlled LED" >&2
-	#WaitForTargetReboot
-
-	
 	# 24. Remove power jumper;
 	# 25. Disconnect from USB;
 	# 26. Disconnect battery;
