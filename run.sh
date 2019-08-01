@@ -23,7 +23,7 @@ source ./lib/common.sh
 
 
 target_setup() {
-	# echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
+	
 	# 1. Plug in SIM, microSD card, IoT test card, and expansion-connector test board;
 	# 2. Connect power jumper across pins 2 & 3;
 	# 3. Confirm "battery protect" switch is ON (preventing the device from booting on battery power);
@@ -91,8 +91,11 @@ target_setup() {
 	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/system/yellow_factory_test.$TARGET_TYPE.update"
 	WaitForSystemToStart $testingSysIndex
 	sleep 10
+
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
+
+	GetSysLog $imei
 
 	return 0
 }
@@ -100,10 +103,11 @@ target_setup() {
 target_start_test() {
 
 	TEST_LOG=$(SshToTarget "/bin/sh /tmp/yellow_testing/yellow_test.sh")
-	#echo $TEST_LOG
+
 	#Check all test step is passed 
 	if [[ ${TEST_LOG[@]} == *"Completed: success"* ]]; then
 	 	write_test_result
+	 	#echo $TEST_LOG
 	 	return 0
 	fi
 
@@ -156,13 +160,16 @@ write_test_result () {
 	then
 		return 1
 	else
-		TEST_LOG=$(SshToTarget "/bin/echo -n -e $msg > $eeprom_path")
+		SshToTarget "/bin/echo -n -e $msg > $eeprom_path"
 	fi
 
     return 0
 }
 
-# main
+# main program
+imei=$(SshToTarget "/legato/systems/current/bin/cm info imei")
+#script ./results/$imei/testlog
+
 if ! target_setup
 then
 	TEST_RESULT="f"
@@ -182,3 +189,4 @@ then
 fi
 
 EchoPassOrFail $TEST_RESULT
+#exit

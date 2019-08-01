@@ -1301,3 +1301,17 @@ SetupSecurityUnpackDir()
         SshToTarget "/bin/chown SecurityUnpack $security_unpack_dir"
     fi
 }
+
+
+#=== FUNCTION =============================================================================
+#
+#        NAME: GetSysLog
+# DESCRIPTION: Get System log of module
+#==========================================================================================
+GetSysLog()
+{
+    mkdir -p ./results/"$1"
+    local time_str=$(date +"%Y-%m-%d-%H:%M")
+    ssh root@$TARGET_IP  '/sbin/logread -f' > ./results/"$1"/syslog_"$time_str" &
+}
+

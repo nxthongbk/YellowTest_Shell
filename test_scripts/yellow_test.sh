@@ -201,7 +201,7 @@ test_buzzer() {
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
 	do
-		local resp=$(prompt_char "Press button and listen for buzzer\nDo you here the buzzer's sound when pressing button? (Y/N)")
+		local resp=$(prompt_char "Press generic button and listen for buzzer. Do you hear the buzzer's sound when pressing button? (Y/N)")
 	done
 	if [ "$resp" = "N" ]
 	then
@@ -439,7 +439,7 @@ yellowManualTest_initial() {
 
 #=== FUNCTION ==================================================================
 #
-#        NAME: yellowTest_WifiTest
+#        NAME: yellowTest_WifiScan
 # DESCRIPTION: Scan WiFi and see dedicated AP
 #   PARAMETER: None
 #
@@ -449,15 +449,6 @@ yellowManualTest_initial() {
 #===============================================================================
 yellowTest_WifiScan() {
 	
-	# /legato/systems/current/bin/app start wifi >&2
-	# if [ $? = 0 ]
-	# then
-	# 	echo 'start wifi service' >&2
-	# else
-	# 	echo 'Unable to start service' >&2
-	# 	return 1
-	# fi
-
 	/legato/systems/current/bin/wifi client start >&2
 	if [ $? = 0 ]
 	then
@@ -467,13 +458,76 @@ yellowTest_WifiScan() {
 		return 1
 	fi
 
-	
-	/legato/systems/current/bin/wifi client scan | grep "$WIFI_ACCESSPOINT"
+	sleep 2
+
+	/legato/systems/current/bin/wifi client scan | grep "$WIFI_ACCESSPOINT" >&2
 	if [ $? = 0 ]
 	then
 		echo "Able to find wifi Accesspoint $WIFI_ACCESSPOINT" >&2
 	else
 		echo "Unable to find wifi Accesspoint $WIFI_ACCESSPOINT" >&2
+		return 1
+	fi
+
+	failure_msg=""
+	return 0
+}
+
+#=== FUNCTION ==================================================================
+#
+#        NAME: yellowTest_uSD
+# DESCRIPTION: Test Read Write uSD Card
+#   PARAMETER: None
+#
+#   RETURNS 1: PASSED/FAILED
+#   RETURNS 2: Failure message
+#
+#===============================================================================
+yellowTest_uSD() {
+	
+	/bin/mkdir /tmp/sd
+	if [ $? = 0 ]
+	then
+		echo 'Create sd directory successflly' >&2
+	else
+		echo 'Create sd directory unsuccessflly' >&2
+		return 1
+	fi
+
+	/bin/mount -ofmask=0111 -odmask=0000 -osmackfsdef=sd /dev/mmcblk0p1 /tmp/sd
+
+	if [ $? = 0 ]
+	then
+		echo 'Mount sd directory successflly' >&2
+	else
+		echo 'Mount sd directory unsuccessflly' >&2
+		return 1
+	fi
+
+	/bin/touch /tmp/sd/log.txt
+	if [ $? = 0 ]
+	then
+		echo 'Create file on SDcard successflly' >&2
+	else
+		echo 'Create file on SDcard unsuccessflly' >&2
+		return 1
+	fi
+
+	/bin/echo foo >> /tmp/sd/log.txt
+	if [ $? = 0 ]
+	then
+		echo 'Write file on SDcard successflly' >&2
+	else
+		echo 'Write file on SDcard unsuccessflly' >&2
+		return 1
+	fi
+
+	/bin/cat /tmp/sd/log.txt
+	if [ $? = 0 ]
+	then
+		echo 'Read file on SDcard successflly' >&2
+	else
+		echo 'Read file on SDcard unsuccessflly' >&2
 		return 1
 	fi
 
@@ -514,10 +568,12 @@ yellowTest_I2CDetect() {
 			echo "Detected I2C address $address" >&2
 		else
 			echo "I2C address $address does not exist" >&2
-			# return 1
+			return 1
 		fi
 	done
 
+	/legato/systems/current/bin/legato start
+	sleep 10
 	failure_msg=""
 	return 0
 }
@@ -536,7 +592,7 @@ yellowManualTest_final() {
 	# 18. Switch cellular antenna selection DIP switch;
 	#prompt_char "Switch cellular antenna selection DIP switch then press ENTER"
 	# 19. Press button to finalize the test;
-	echo "Press button to finalize the test" >&2
+	echo "Press generic button to finalize the test" >&2
 	#     (On-board test software should verify that the correct string has been written to the NFC tag.)
 	# 20. Confirm software-controlled tri-colour LED has changed to white;
 	while true
@@ -629,12 +685,8 @@ test_automation() {
 	sleep 2
 	/legato/systems/current/bin/app restart YellowTest
 	
-	log=$(/sbin/logread)
-
-	# echo $log >&2
-
 	#echo 'Test SIM state"' >&2
-	/sbin/logread | grep "Check SIM state: PASSED"
+	/sbin/logread > grep "Check SIM state: PASSED"
 	if [ $? = 0 ]
 	then
 		echo 'Check SIM state: PASSED' >&2
@@ -711,7 +763,7 @@ test_automation() {
 		return 1
 	fi
 
-
+	# Waiting DV4 for SDIO selection between wifi and uSD
 	# echo 'Checking message "SDCard Read/Wrire test PASSED"' >&2
 	# /sbin/logread | grep "SDCard Read/Wrire test PASSED"
 	# if [ $? = 0 ]
@@ -854,8 +906,7 @@ else
 fi
 echo '======================================================================='
 
-
-
+# uSD Test
 echo "=== Start automation testing ==="
 test_automation
 if [ $? != 0 ]
@@ -867,6 +918,19 @@ else
 	echo "$test_result"
 fi
 echo '======================================================================='
+
+# echo "=== Start uSD Read Write testing ==="
+# yellowTest_uSD
+# if [ $? != 0 ]
+# then
+# 	fail_count=$(($fail_count + 1))
+# 	echo "----->               FAILURE           <-----"
+# 	echo "$failure_msg" 
+# else
+# 	echo "$test_result"
+# fi
+# echo '======================================================================='
+
 
 # I2C address test.
 echo "=== Start I2C testing ==="
