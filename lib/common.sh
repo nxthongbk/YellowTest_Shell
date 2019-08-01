@@ -20,6 +20,7 @@ CONNECTION_TIMEOUT=10
 #==========================================================================================
 prompt_char() {
     echo $1 >&2
+    #echo $1 >out 2>&2
     read prompt_input
     echo $(echo $prompt_input | tr 'a-z' 'A-Z')
 }

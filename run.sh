@@ -94,7 +94,7 @@ target_setup() {
 
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
-
+	imei=$(SshToTarget "/legato/systems/current/bin/cm info imei")
 	GetSysLog $imei
 
 	return 0
@@ -167,7 +167,6 @@ write_test_result () {
 }
 
 # main program
-imei=$(SshToTarget "/legato/systems/current/bin/cm info imei")
 #script ./results/$imei/testlog
 
 if ! target_setup
