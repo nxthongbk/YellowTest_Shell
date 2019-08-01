@@ -1,0 +1,315 @@
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2420]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'cellNetService.cellNetService.le_sim' truncated to 'cellNetService.cellNetService.l'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2420]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'cellNetService.cellNetService.le_mrc' truncated to 'cellNetService.cellNetService.l'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2420]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'cellNetService.cellNetService.le_secStore' truncated to 'cellNetService.cellNetService.l'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | cellNetService[2420]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'cellNetService.watchdogChain.le_wdog' truncated to 'cellNetService.watchdogChain.le'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | cellNetService[2420]/cellNetService T=main | cellNetServiceServer.c _cellNetService_COMPONENT_INIT() 919 | Cellular Network Server is ready
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2421]/framework T=main | mem.c VerifyUniquenessOfName() 670 | Multiple memory pools share the same name '.le_mrc_ClientThreadData'. This will become illegal in future releases.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2421]/framework T=main | mem.c VerifyUniquenessOfName() 670 | Multiple memory pools share the same name '.le_cfg_ClientThreadData'. This will become illegal in future releases.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2421]/framework T=main | mem.c VerifyUniquenessOfName() 670 | Multiple memory pools share the same name '.le_mdc_ClientThreadData'. This will become illegal in future releases.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2421]/framework T=main | mem.c VerifyUniquenessOfName() 670 | Multiple memory pools share the same name '.le_mrc_ClientThreadData'. This will become illegal in future releases.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2421]/framework T=main | safeRef.c le_ref_CreateRef() 537 | Safe reference map maximum references exceeded for refFdMonitors.
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[2421]/framework T=main | mem.c VerifyUniquenessOfName() 670 | Multiple memory pools share the same name '.le_cfg_ClientThreadData'. This will become illegal in future releases.
+Aug  1 23:04:46 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | unixSocket.c ExtractFileDescriptor() 34 | Received fd (12).
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | dcsDaemon[2421]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'dcsDaemon.dcsDaemon.le_wifiClient' truncated to 'dcsDaemon.dcsDaemon.le_wifiClie'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsDaemon T=main | dcsTechRank.c dcsTechRank_Init() 781 | Wifi client is available
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsDaemon T=main | dcsServer.c _dcsDaemon_COMPONENT_INIT() 1730 | Data Channel Service le_data is ready
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcs T=main | dcs.c _dcs_COMPONENT_INIT() 832 | Data Channel Service le_dcs is ready; server session reference (nil)
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsNet T=main | dcsNet.c _dcsNet_COMPONENT_INIT() 614 | Data Channel Service's network component is ready
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | dcsDaemon[2421]/framework T=main | safeRef.c InitMap() 217 | Map name 'refCellular Connection Reference Map' truncated to 'refCellular Connection Referenc'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsCellular T=main | dcsCellular.c _dcsCellular_COMPONENT_INIT() 1364 | Data Channel Service's Cellular component is ready
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsCellular T=main | dcsCellular.c _dcsCellular_COMPONENT_INIT() 1373 | Data Channel Service's Cellular Handlers component is ready
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | dcsDaemon[2421]/framework T=main | mem.c VerifyUniquenessOfName() 670 | Multiple memory pools share the same name '.le_wifiClient_ClientThreadData'. This will become illegal in future releases.
+Aug  1 23:04:46 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | unixSocket.c ExtractFileDescriptor() 34 | Received fd (13).
+Aug  1 23:04:46 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_AddConnectionEventHandler() 736 | Add wifi connection event handler
+Aug  1 23:04:46 swi-mdm9x28-wp user.warn Legato: -WRN- | dcsDaemon[2421]/framework T=main | safeRef.c InitMap() 217 | Map name 'refWifi Connection Reference Map' truncated to 'refWifi Connection Reference Ma'.
+Aug  1 23:04:46 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c _dcsWifi_COMPONENT_INIT() 1652 | Data Channel Service's Wifi component is ready
+Aug  1 23:04:51 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/modemDaemon T=main | le_sim.c EventTimerHandler() 1195 | Disabling last ICCID change forwarding
+Aug  1 23:04:51 swi-mdm9x28-wp user.info Legato:  INFO | dcsInternal[2422]/dcsInternal T=main | dcsInternal.c _dcsInternal_COMPONENT_INIT() 64 | Initializing data channels
+Aug  1 23:04:51 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcs T=main | dcs.c le_dcs_GetChannels() 735 | DCS' first channel list query to initialize channel list
+Aug  1 23:04:51 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcs T=main | dcs.c DcsInitInternalSession() 708 | DCS internal session reference set to 0x7f5a6490
+Aug  1 23:04:51 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c DcsWifiClientStart() 250 | Starting Wifi client
+Aug  1 23:04:51 swi-mdm9x28-wp user.warn Legato: -WRN- | dcsInternal[2422]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'dcsInternal.watchdogChain.le_wdog' truncated to 'dcsInternal.watchdogChain.le_wd'.
+Aug  1 23:04:51 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | WIFI_START
+Aug  1 23:04:52 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | Linux swi-mdm9x28-wp 3.18.131 #1 PREEMPT Thu Jul 11 22:36:26 UTC 2019 armv7l GNU/Linux
+Aug  1 23:04:52 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/compat.ko': File exists
+Aug  1 23:04:52 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/cfg80211.ko': File exists
+Aug  1 23:04:52 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/brcmutil.ko': File exists
+Aug  1 23:04:52 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/brcmfmac.ko': File exists
+Aug  1 23:04:54 swi-mdm9x28-wp user.info kernel: [  120.902342] gpio_check_and_wake: wake-n_gpio26 STATE=WAKEUP
+Aug  1 23:04:54 swi-mdm9x28-wp user.err kernel: [  120.938276] swimcu_gpio_irq_event_handle: Re-enabled irq 0 type A for MCU GPIO 0 
+Aug  1 23:04:54 swi-mdm9x28-wp user.info kernel: [  120.945802] gpio_check_and_wake: wake-n_gpio26 STATE=SLEEP
+Aug  1 23:04:54 swi-mdm9x28-wp user.info kernel: [  121.441223] sierra_startup_monitor
+Aug  1 23:04:56 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | updateDaemon.c updateDaemon_MarkGood() 227 | System passed probation. Marking 'good'.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 6552bbef11e21ae2293770e6550fde29.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum ff2f0227f3e82e44efc3ec14b029d396 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum d7fd8bdd9746b9784bd90241e62efde7.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 32cf8b7cd7f1156ccd46c50f05708b84 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 6802557a404997c373310b37fb52aaa2.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum a712824ceabd73f02ae2e293629bacee is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum ee00ff23555e0d8828755f4a4f8867a3 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 6777861f78f636919ef2ad176a5ac2f8 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 0e7de9b0764bf180a5a4d12a8dd34dc3.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum c021a038b11ad7b40353928ab3fe29c1.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum a80b3132ef8107268a996ed28f4af8bb.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 0865766aed9bd74e708ac2cbeaf58882.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum d7cff2c5dc46c01f0189bbdedeac360f is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 5ab1f59b9a8964c269f8c4aa94e027ce.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum a8ce706825727e202a6b6f22ae776bef.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 7dce148b42e91c9ea4d78179954ddb71 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 88cd062ac42edcec101ea8b92e413a9c.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 7868d0034186fc9122434ccf3c34e63f is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum d28079d40e23b5c25500cc6f168a7cb8 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum d513454c6990d51bbdd95998cfda190d.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum dd96b5541ce153d9ee655e1c3f14db34 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 98a8c54179ff475849667ce676887c03 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 6059fe17fb7dc7b43ead162ea91378de.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum b94503e11d4bf0476f9a0f535832e413 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 921c0a6933cb4df621da4da96a691af6 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum be75a30bcc50c7a95f3e5b7189438718 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 49246a804085f52bb10f1b9834c63f57.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 059cc1be06347930b7a1983afbe51080 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 634c7ec29ce7a940218496d20182f0e6.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum bc263bb9a200d25a81a5652060202805.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 418d8e8be4f09c8d404546293a403ebc.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum a300d988da033d98656f42833d80326c.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum e800468083f8f28d39915d5b2caa5407.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 675cb46a6d466b087dcbb1c052988056.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 9990bbed2895ea88582244fa764b2e98 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 5d3d78c537edfc6c3cf880152378b925.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 1488fe6659371ea8d493323b7b510247.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 2911576449b1fd13d71d3b0dc28d5147 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum ae269001e8c60fc1a1b9526483f4ce7e.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum c4543df8151887f05f0f2d72f868cfcc.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum f680e22896b4b6d9d39790538fc48c3d.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 9a35ee201f74459e586c626264688c82 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 4c34d401436c371ddaa07c1b95779f26 is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum c3048d49e13b17beba862977bf0bddad.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 6adfe5c369d4e9225f27e8b686d836c5.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 69d98698dbc428c60a5997ed4bf2166c.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum db2a482751e23f0fa4a65780b3d95974.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum afff6fe1e2593acdca903671b08d8fdb is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 9384d483c89c9cb086f9b32fabf62679.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 2ccd213158bae7a742665bfa8cee5e6b.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1072 | Removing unused app with MD5 sum 9cf812e114c71ce495c85877bcbaf97f.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | updateDaemon[2292]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1081 | App with MD5 sum 35566f1d1283364e1022dba61698f34b is still needed.
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | pa_wifi_client.c pa_wifiClient_Start() 507 | WiFi client started correctly
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | thread.c SetSchedPolicyAttr() 652 | Set scheduling policy to SCHED_OTHER for thread 'WifiClientPaThread'.
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_Start() 813 | WIFI client started successfully
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c IsScanRunning() 584 | IsScanRunning .0
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_Scan() 900 | Scan started
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | thread.c SetSchedPolicyAttr() 652 | Set scheduling policy to SCHED_OTHER for thread 'WiFi Client Scan Thread'.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/modemDaemon T=main | le_mdc.c le_mdc_GetProfileList() 2654 | le_mdc_GetProfileList: profile list size given 36
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/swiQmi T=main | swiQmi.c swiQmi_InitQmiService() 596 | qmi_client_get_service_list num_entries 1 num_services=1
+Aug  1 23:04:57 swi-mdm9x28-wp user.warn Legato: -WRN- | wifiService[2435]/framework T=WiFi Client Scan Thread | thread.c PThreadStartRoutine() 410 | Failed to set thread name for WiFi Client Scan Thread (34).
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=WiFi Client Scan Thread | thread.c PThreadStartRoutine() 472 | Set nice level to 0.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_Scan() 596 | Scanning
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c MarkAllAccessPointsOld() 436 | Mark all AP as old
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c MarkAllAccessPointsOld() 465 | Marked: 0
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/le_pa T=main | pa_mdc_qmi.c pa_mdc_GetProfileList() 4596 | # of cellular profiles returned: 3
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/le_pa T=main | pa_mdc_qmi.c pa_mdc_GetProfileList() 4604 | Cellular profile retrieved index 1, type 0, name 
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/le_pa T=main | pa_mdc_qmi.c pa_mdc_GetProfileList() 4604 | Cellular profile retrieved index 2, type 0, name 
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | modemDaemon[2429]/le_pa T=main | pa_mdc_qmi.c pa_mdc_GetProfileList() 4604 | Cellular profile retrieved index 3, type 0, name 
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 679 | Scan results
+Aug  1 23:04:57 swi-mdm9x28-wp user.warn Legato: -WRN- | wifiService[2435]/framework T=WifiClientPaThread | thread.c PThreadStartRoutine() 410 | Failed to set thread name for WifiClientPaThread (34).
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=WifiClientPaThread | thread.c PThreadStartRoutine() 472 | Set nice level to 0.
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WifiClientPaThread | pa_wifi_client.c WifiClientPaThreadMain() 282 | Wifi event report thread started!
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsCellular T=main | dcsCellular.c DcsCellularAddConnEventHandler() 559 | Succeeded adding connection event handler for connection 1
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsCellular T=main | dcsCellular.c DcsCellularAddConnEventHandler() 559 | Succeeded adding connection event handler for connection 2
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsCellular T=main | dcsCellular.c DcsCellularAddConnEventHandler() 559 | Succeeded adding connection event handler for connection 3
+Aug  1 23:04:57 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcs T=main | dcsTech.c le_dcsTech_CollectChannelQueryResults() 629 | Query channel list results collected from technology 2, retcode 0, list size 3
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: 'WIFICLIENT_START_SCAN '
+Aug  1 23:04:57 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WifiClientPaThread | pa_wifi_client.c WifiClientPaThreadMain() 300 | PARSING:WIFI_SET_EVENT : len:15
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WifiClientPaThread | pa_wifi_client.c WifiClientPaThreadMain() 300 | PARSING:wlan0 (phy #0): scan finished: 2412 2417 2422 2427 2432 2437 2442 2447 2452 2457 2462 2467 2472 2484, "" : len:105
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: 'BSS ec:84:b4:c7:d3:9d(on wlan0) '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 752 | FOUND BSSID: 'ec:84:b4:c7:d3:9d(on wlan0) '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 755 | BSSID: 'ec:84:b4:c7:d3:9d'
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 763 | Interface: 'wlan0'
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '	signal: -80.00 dBm '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 746 | FOUND SIGNAL STRENGTH: '-80.00 dBm '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 748 | signal(-80)
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '	SSID: cuongthanhly '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 736 | FOUND SSID: 'cuongthanhly '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 740 | SSID: 'cuongthanhly'
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c FindAccessPointRefFromBssid() 220 | Find AP from BSSID
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c AddAccessPointToApRefMap() 341 | New AP[1] SignalStrength -80 | SSID length 12 | SSID: "cuongthanhly"
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c AddAccessPointToApRefMap() 351 | le_ref_CreateRef foundAccessPointPtr 0x7f5a5960; Ref0x93 
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 679 | Scan results
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '		 * OBSS non-GF present: 0 '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '		 * SSID List '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: 'BSS 9c:50:ee:d3:01:74(on wlan0) '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 752 | FOUND BSSID: '9c:50:ee:d3:01:74(on wlan0) '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 755 | BSSID: '9c:50:ee:d3:01:74'
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '	signal: -51.00 dBm '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 746 | FOUND SIGNAL STRENGTH: '-51.00 dBm '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 748 | signal(-51)
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '	SSID: NXT '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 736 | FOUND SSID: 'NXT '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 740 | SSID: 'NXT'
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c FindAccessPointRefFromBssid() 220 | Find AP from BSSID
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c AddAccessPointToApRefMap() 341 | New AP[2] SignalStrength -51 | SSID length 3 | SSID: "NXT"
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c AddAccessPointToApRefMap() 351 | le_ref_CreateRef foundAccessPointPtr 0x7f5a58e0; Ref0x293 
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 679 | Scan results
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: '		 * OBSS non-GF present: 0 '
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 771 | End of scan results
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_ScanDone() 802 | Scan exit status(0)
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c ScanThreadDestructor() 534 | Destruct scan thread
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=WiFi Client Scan Thread | mem.c le_mem_ForceAlloc() 1172 | Memory pool 'daemon.WifiConnectStatePool' overflowed. Expanded to 1 blocks.
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c PaEventIndicationHandler() 176 | WiFi event: 2, interface: wlan0, bssid: 
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c PaEventHandler() 199 | Event: 2 
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetCurrentConnection() 1175 | AP reference of currently selected connection: (nil)
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c IsScanRunning() 584 | IsScanRunning .0
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetFirstAccessPoint() 942 | Get first AP
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetFirstAccessPoint() 956 | AP ref = 0x93
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetSsid() 1132 | AP ref 0x93
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetSsid() 1152 | apPtr->AccessPoint.ssidLength 12
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetSignalStrength() 1043 | Get signal strength
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetBssid() 1080 | AP ref 0x93
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c WifiReadScanResults() 833 | Wifi result: SSID = cuongthanhly, BSSID = ec:84:b4:c7:d3:9d, AP reference 0x93, signal strength = -80
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetNextAccessPoint() 985 | Get next AP
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c IsScanRunning() 584 | IsScanRunning .0
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetNextAccessPoint() 1002 | AP ref = 0x293
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetNextAccessPoint() 1012 | AP ref = 0x293
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetSsid() 1132 | AP ref 0x293
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetSsid() 1152 | apPtr->AccessPoint.ssidLength 3
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetSignalStrength() 1043 | Get signal strength
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetBssid() 1080 | AP ref 0x293
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c WifiReadScanResults() 833 | Wifi result: SSID = NXT, BSSID = 9c:50:ee:d3:01:74, AP reference 0x293, signal strength = -51
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetNextAccessPoint() 985 | Get next AP
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c IsScanRunning() 584 | IsScanRunning .0
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetNextAccessPoint() 1017 | AP not found
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c WifiReadScanResults() 869 | Wifi SSID results: 2 found
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_GetCurrentConnection() 1175 | AP reference of currently selected connection: (nil)
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcs T=main | dcsTech.c le_dcsTech_CollectChannelQueryResults() 629 | Query channel list results collected from technology 1, retcode 0, list size 2
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcs T=main | dcsTech.c DcsTechPostChannelList() 608 | Posting collected channel list to apps of size 5
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsInternal[2422]/dcsInternal T=main | dcsInternal.c dcsInternalChannelQueryHandler() 49 | Internal list of data channels in le_dcs initialized
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c DcsWifiClientStop() 291 | Stopping Wifi client
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | WIFI_STOP
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | Linux swi-mdm9x28-wp 3.18.131 #1 PREEMPT Thu Jul 11 22:36:26 UTC 2019 armv7l GNU/Linux
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | WIFI_UNSET_EVENT
+Aug  1 23:04:58 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | Killed
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | pa_wifi_client.c pa_wifiClient_Stop() 573 | WiFi client stopped correctly
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c ReleaseAllAccessPoints() 400 | Release all AP
+Aug  1 23:04:58 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_Stop() 870 | WIFI client stopped successfully
+Aug  1 23:04:58 swi-mdm9x28-wp user.info Legato:  INFO | dcsDaemon[2421]/dcsWifi T=main | dcsWifi.c DcsWifiClientStop() 299 | DCS succeeded to stop wifiClient
+Aug  1 23:04:58 swi-mdm9x28-wp user.info kernel: [  125.456102] gpio_check_and_wake: wake-n_gpio26 STATE=WAKEUP
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.468805] ------------[ cut here ]------------
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.472407] WARNING: CPU: 0 PID: 4 at /usr/src/kernel/kernel/locking/mutex-debug.c:80 debug_mutex_unlock+0xac/0x184()
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.482986] DEBUG_LOCKS_WARN_ON(lock->owner != current)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.488018] Modules linked in: spisvc(O) rtc_sync(O) iot_test_card(O) mangoh_yellow_dev(O) opt300x(O) rtc_pcf85063(O) expander(O) cp2130(O) bq27xxx_battery(O) bq25601(O) bmi160_i2c(O) bmi160(O) bmc150_magn_i2c(O) bmc150_magn
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.518754] CPU: 0 PID: 4 Comm: kworker/0:0 Tainted: G           O   3.18.131 #1
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.526132] Workqueue: events gpio_check_and_wake
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.530832] [<c0014428>] (unwind_backtrace) from [<c00122ac>] (show_stack+0x10/0x14)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.538546] [<c00122ac>] (show_stack) from [<c001f490>] (warn_slowpath_common+0x60/0x80)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.546619] [<c001f490>] (warn_slowpath_common) from [<c001f4dc>] (warn_slowpath_fmt+0x2c/0x3c)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.555296] [<c001f4dc>] (warn_slowpath_fmt) from [<c004354c>] (debug_mutex_unlock+0xac/0x184)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.563894] [<c004354c>] (debug_mutex_unlock) from [<c079ba2c>] (__mutex_unlock_slowpath+0xcc/0x138)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.573014] [<c079ba2c>] (__mutex_unlock_slowpath) from [<bf1767e0>] (opt300x_irq+0xb4/0x12c [opt300x])
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.582394] [<bf1767e0>] (opt300x_irq [opt300x]) from [<c0053028>] (handle_nested_irq+0x104/0x154)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.591327] [<c0053028>] (handle_nested_irq) from [<c031d648>] (swimcu_gpio_irq_event_handle+0x70/0x114)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.600788] [<c031d648>] (swimcu_gpio_irq_event_handle) from [<c031c190>] (swimcu_process_events+0x114/0x328)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.610685] [<c031c190>] (swimcu_process_events) from [<c003618c>] (notifier_call_chain+0x40/0x64)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.619624] [<c003618c>] (notifier_call_chain) from [<c0036208>] (raw_notifier_call_chain+0x14/0x1c)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.628735] [<c0036208>] (raw_notifier_call_chain) from [<c023c648>] (gpio_check_and_wake+0xa0/0x120)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.637940] [<c023c648>] (gpio_check_and_wake) from [<c0031014>] (process_one_work+0x1bc/0x2e0)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.646615] [<c0031014>] (process_one_work) from [<c0031dd0>] (worker_thread+0x2dc/0x3b8)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.654775] [<c0031dd0>] (worker_thread) from [<c003567c>] (kthread+0xc8/0xd4)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.661984] [<c003567c>] (kthread) from [<c000e798>] (ret_from_fork+0x14/0x3c)
+Aug  1 23:04:58 swi-mdm9x28-wp user.warn kernel: [  125.669181] ---[ end trace bb35166cf6c1aab8 ]---
+Aug  1 23:04:58 swi-mdm9x28-wp user.err kernel: [  125.682386] i2c-msm-v2 78b8000.i2c: NACK: slave not responding, ensure its powered: msgs(n:1 cur:0 tx) bc(rx:0 tx:18) mode:FIFO slv_addr:0x3a MSTR_STS:0x001363c8 OPER:0x00000090
+Aug  1 23:04:58 swi-mdm9x28-wp user.err kernel: [  125.709677] swimcu_gpio_irq_event_handle: Re-enabled irq 0 type A for MCU GPIO 0 
+Aug  1 23:04:58 swi-mdm9x28-wp user.info kernel: [  125.716584] gpio_check_and_wake: wake-n_gpio26 STATE=SLEEP
+Aug  1 23:05:02 swi-mdm9x28-wp user.info kernel: [  129.443667] gpio_check_and_wake: wake-n_gpio26 STATE=WAKEUP
+Aug  1 23:05:02 swi-mdm9x28-wp user.err kernel: [  129.481383] swimcu_gpio_irq_event_handle: Re-enabled irq 0 type A for MCU GPIO 0 
+Aug  1 23:05:02 swi-mdm9x28-wp user.info kernel: [  129.491432] gpio_check_and_wake: wake-n_gpio26 STATE=SLEEP
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c app_Create() 3256 | Creating app 'wifi'
+Aug  1 23:05:12 swi-mdm9x28-wp user.warn Legato: -WRN- | supervisor[2278]/supervisor T=main | proc.c GetWatchdogAction() 360 | wifi@0 watchdogAction '' in proc section
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c app_Start() 3469 | Starting app 'wifi'
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c CreateFileLink() 2153 | Created file link '/legato/systems/current/apps/wifi/read-only/lib/libComponent_wifi.so' to '/legato/systems/current/appsWriteable/wifi/lib/libComponent
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c CreateFileLink() 2153 | Created file link '/legato/systems/current/apps/wifi/read-only/bin/wifi' to '/legato/systems/current/appsWriteable/wifi/bin/wifi'.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | proc.c proc_Start() 1401 | Starting process 'wifi@0' with pid 5764
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | proc.c proc_Start() 1361 | Execing 'bin/wifi'
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxCoreDumpFileBytes to value 8192.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxFileBytes to value 90112.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxFileDescriptors to value 256.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxMQueueBytes to value 512.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxThreads to value 20.
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5764]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxQueuedSignals to value 100.
+Aug  1 23:05:12 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | unixSocket.c ExtractFileDescriptor() 34 | Received fd (14).
+Aug  1 23:05:12 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | unixSocket.c ExtractFileDescriptor() 34 | Received fd (15).
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | WIFI_START
+Aug  1 23:05:12 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435] | Linux swi-mdm9x28-wp 3.18.131 #1 PREEMPT Thu Jul 11 22:36:26 UTC 2019 armv7l GNU/Linux
+Aug  1 23:05:12 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/compat.ko': File exists
+Aug  1 23:05:12 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/cfg80211.ko': File exists
+Aug  1 23:05:12 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/brcmutil.ko': File exists
+Aug  1 23:05:12 swi-mdm9x28-wp user.err Legato: =ERR= | wifiService[2435] | insmod: can't insert '/legato/systems/current/modules/brcmfmac.ko': File exists
+Aug  1 23:05:15 swi-mdm9x28-wp user.crit Legato: *CRT* | watchdog[2293]/watchdogDaemon T=main | watchdog.c WatchdogHandleExpiry() 517 | proc 2431 [portDaemon] timed out
+Aug  1 23:05:15 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | apps.c wdog_WatchdogTimedOut() 2429 | Handling watchdog expiry for: procId 2431
+Aug  1 23:05:15 swi-mdm9x28-wp user.crit Legato: *CRT* | supervisor[2278]/supervisor T=main | app.c app_WatchdogTimeoutHandler() 3941 | The watchdog for process 'portDaemon' in app 'portService' has timed out but there is no policy. The process will be restarted by default.
+Aug  1 23:05:15 swi-mdm9x28-wp user.info Legato:  INFO | watchdog[2293]/watchdogDaemon T=main | watchdog.c CleanUpClosedClient() 355 | Client session closed
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | resourceLimits.c GetCfgResourceLimit() 207 | Configured resource limit maxStackBytes is not available.  Using the default value 0.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | proc.c proc_Start() 1401 | Starting process 'portDaemon' with pid 5780
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | proc.c proc_Start() 1361 | Execing 'portDaemon'
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxFileBytes to value 102400.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxFileDescriptors to value 256.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxMQueueBytes to value 512.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxThreads to value 20.
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5780]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxQueuedSignals to value 100.
+Aug  1 23:05:16 swi-mdm9x28-wp user.warn Legato: -WRN- | _UNKNOWN_[5780]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'portDaemon.portDaemon.le_atServer' truncated to 'portDaemon.portDaemon.le_atServ'.
+Aug  1 23:05:16 swi-mdm9x28-wp user.warn Legato: -WRN- | portDaemon[5780]/framework T=main | fdMonitor.c le_fdMonitor_Create() 734 | FD Monitor object name 'portDaemon.watchdogChain.le_wdog' truncated to 'portDaemon.watchdogChain.le_wdo'.
+Aug  1 23:05:16 swi-mdm9x28-wp user.warn Legato: -WRN- | watchdog[2293]/watchdogDaemon T=main | watchdog.c GetConfigKickTimeoutInterval() 781 | No watchdog timeout configured for portService - using default 30000 ms
+Aug  1 23:05:16 swi-mdm9x28-wp user.info Legato:  INFO | portDaemon[5780]/portDaemon T=main | le_port.c JsonEventHandler() 1472 | JSON parsing is completed.
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | pa_wifi_client.c pa_wifiClient_Start() 507 | WiFi client started correctly
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | thread.c SetSchedPolicyAttr() 652 | Set scheduling policy to SCHED_OTHER for thread 'WifiClientPaThread'.
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_Start() 813 | WIFI client started successfully
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | le_wifiClient_server.c CleanupClientData() 160 | Client 0x7f574a98 is closed !!!
+Aug  1 23:05:17 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | proc.c proc_SigChildHandler() 2077 | Process 'wifi@0' (PID: 5764) has exited with exit code 0.
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | le_wifiClient_server.c CleanupClientData() 181 | Found session ref 0x7f574b28; does not match
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | le_wifiAp_server.c CleanupClientData() 160 | Client 0x7f574a08 is closed !!!
+Aug  1 23:05:17 swi-mdm9x28-wp user.warn Legato: -WRN- | wifiService[2435]/framework T=WifiClientPaThread | thread.c PThreadStartRoutine() 410 | Failed to set thread name for WifiClientPaThread (34).
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=WifiClientPaThread | thread.c PThreadStartRoutine() 472 | Set nice level to 0.
+Aug  1 23:05:17 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WifiClientPaThread | pa_wifi_client.c WifiClientPaThreadMain() 282 | Wifi event report thread started!
+Aug  1 23:05:17 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c app_StopComplete() 4751 | app 'wifi' has stopped.
+Aug  1 23:05:17 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | apps.c DeactivateAppContainer() 374 | Application 'wifi' has stopped.
+Aug  1 23:05:17 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WifiClientPaThread | pa_wifi_client.c WifiClientPaThreadMain() 300 | PARSING:WIFI_SET_EVENT : len:15
+Aug  1 23:05:19 swi-mdm9x28-wp user.warn Legato: -WRN- | supervisor[2278]/supervisor T=main | proc.c GetWatchdogAction() 360 | wifi@0 watchdogAction '' in proc section
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c app_Start() 3469 | Starting app 'wifi'
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c CreateFileLink() 2083 | Skipping file link '/legato/systems/current/apps/wifi/read-only/lib/libComponent_wifi.so' to '/legato/systems/current/appsWriteable/wifi/lib/libComponen
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | app.c CreateFileLink() 2083 | Skipping file link '/legato/systems/current/apps/wifi/read-only/bin/wifi' to '/legato/systems/current/appsWriteable/wifi/bin/wifi': Already exists
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[2278]/supervisor T=main | proc.c proc_Start() 1401 | Starting process 'wifi@0' with pid 5803
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | proc.c proc_Start() 1361 | Execing 'bin/wifi'
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxCoreDumpFileBytes to value 8192.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxFileBytes to value 90112.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxFileDescriptors to value 256.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxMQueueBytes to value 512.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxThreads to value 20.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | supervisor[5803]/supervisor T=main | resourceLimits.c SetRLimitValue() 301 | Setting resource limit maxQueuedSignals to value 100.
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | unixSocket.c ExtractFileDescriptor() 34 | Received fd (15).
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | unixSocket.c ExtractFileDescriptor() 34 | Received fd (18).
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_AddConnectionEventHandler() 736 | Add wifi connection event handler
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c IsScanRunning() 584 | IsScanRunning .0
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=main | le_wifiClient.c le_wifiClient_Scan() 900 | Scan started
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=main | thread.c SetSchedPolicyAttr() 652 | Set scheduling policy to SCHED_OTHER for thread 'WiFi Client Scan Thread'.
+Aug  1 23:05:19 swi-mdm9x28-wp user.warn Legato: -WRN- | wifiService[2435]/framework T=WiFi Client Scan Thread | thread.c PThreadStartRoutine() 410 | Failed to set thread name for WiFi Client Scan Thread (34).
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/framework T=WiFi Client Scan Thread | thread.c PThreadStartRoutine() 472 | Set nice level to 0.
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_Scan() 596 | Scanning
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c MarkAllAccessPointsOld() 436 | Mark all AP as old
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | le_wifiClient.c MarkAllAccessPointsOld() 465 | Marked: 0
+Aug  1 23:05:19 swi-mdm9x28-wp user.info Legato:  INFO | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 679 | Scan results
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 726 | Read next scan result
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WiFi Client Scan Thread | pa_wifi_client.c pa_wifiClient_GetScanResult() 729 | PARSING: 'WIFICLIENT_START_SCAN '
+Aug  1 23:05:19 swi-mdm9x28-wp user.debug Legato:  DBUG | wifiService[2435]/daemon T=WifiClientPaThread | pa_wifi_client.c WifiClientPaThreadMain() 300 | PARSING:wlan0 (phy #0): scan started : len:29

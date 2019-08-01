@@ -763,7 +763,7 @@ test_automation() {
 		return 1
 	fi
 
-	# Waiting DV4 for SDIO selection between wifi and uSD
+	# Waiting DV4 for SDIO selection on DIP switch to switch between wifi and uSD
 	# echo 'Checking message "SDCard Read/Wrire test PASSED"' >&2
 	# /sbin/logread | grep "SDCard Read/Wrire test PASSED"
 	# if [ $? = 0 ]
