@@ -99,7 +99,6 @@ target_setup() {
 
 	run_time=$(date +"%Y-%m-%d-%H:%M")
 	imei=$(SshToTarget "/legato/systems/current/bin/cm info imei")
-	GetSysLog $imei $run_time
 
 	return 0
 }
@@ -119,6 +118,9 @@ target_start_test() {
 }
 
 target_cleanup() {
+
+	echo -e "${COLOR_TITLE}Get System Log ${COLOR_RESET}"
+	GetSysLog $imei $run_time
 
 	echo -e "${COLOR_TITLE}Restoring target${COLOR_RESET}"
 
@@ -171,8 +173,6 @@ write_test_result () {
 }
 
 # main program
-#script ./results/$imei/testlog
-
 if ! target_setup
 then
 	TEST_RESULT="f"

@@ -1307,22 +1307,24 @@ SetupSecurityUnpackDir()
 #
 #        NAME: GetSysLog
 # DESCRIPTION: Get System log of module
+# PARAMETER 1: IMEI of module
+# PARAMETER 2: Run Time
 #==========================================================================================
 GetSysLog()
 {
     mkdir -p ./results/"$1"
-    #local time_str=$(date +"%Y-%m-%d-%H:%M")
-    ssh root@$TARGET_IP  '/sbin/logread -f' > ./results/"$1"/syslog_"$2" &
+    ssh root@$TARGET_IP  '/sbin/logread' > ./results/"$1"/syslog_"$2"
 }
 
 #=== FUNCTION =============================================================================
 #
 #        NAME: GetTestLog
-# DESCRIPTION: Get System log of module
+# DESCRIPTION: Get test log of module
+# PARAMETER 1: IMEI of module
+# PARAMETER 2: Run Time
 #==========================================================================================
 GetTestLog()
 {
-    #local time_str=$(date +"%Y-%m-%d-%H:%M")
     mv test.log ./results/$1/testlog_"$2"
 }
 

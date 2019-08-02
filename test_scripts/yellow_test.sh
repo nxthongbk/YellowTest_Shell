@@ -668,9 +668,10 @@ test_automation() {
 	/legato/systems/current/bin/app restart YellowTestService	
 	sleep 2
 	/legato/systems/current/bin/app restart YellowTest
-	
+	sleep 2
+
 	#echo 'Test SIM state"' >&2
-	/sbin/logread > grep "Check SIM state: PASSED"
+	/sbin/logread | grep "Check SIM state: PASSED"
 	if [ $? = 0 ]
 	then
 		echo 'Check SIM state: PASSED' >&2
