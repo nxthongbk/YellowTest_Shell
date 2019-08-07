@@ -137,7 +137,6 @@ target_cleanup() {
 	fi
 
 	echo -e "${COLOR_TITLE}Test is finished${COLOR_RESET}"
-	prompt_char "Remove power jumper then press ENTER"
 	prompt_char "Disconnect from USB then press ENTER"
 	prompt_char "Disconnect battery,Unplug SIM, SD card, IoT card and expansion-connector test board.then press ENTER"
 	prompt_char "Then press ENTER to end testing then press ENTER"
