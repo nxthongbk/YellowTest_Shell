@@ -69,7 +69,7 @@ target_setup() {
 	WaitForDevice "Up" "$rbTimer"
 
 	#remove and generate ssh key
-	#ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
+	ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
 
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
