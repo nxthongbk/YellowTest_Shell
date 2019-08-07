@@ -31,7 +31,7 @@ target_setup() {
 	# 5. Switch "battery protect" switch OFF (allowing the device to boot on battery power);
 
 	prompt_char "Plug in SIM, microSD card, IoT test card, and expansion-connector test board then press ENTER"
-	prompt_char "Connect power jumper across pins 2 & 3 then press ENTER"
+	prompt_char "Connect power jumper across pins 1 & 2 then press ENTER"
 	prompt_char "Confirm \"battery protect\" switch is OFF (preventing the device from booting on battery power)then press ENTER"
 	prompt_char "Connect battery press ENTER"
 	prompt_char "Switch battery protect switch ON then press ENTER"
@@ -54,7 +54,7 @@ target_setup() {
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
 	do
-		local resp=$(prompt_char "Confirm hardware-controlled LED is off the goes green? (Y/N)")
+		local resp=$(prompt_char "Confirm hardware-controlled LED is off then goes green? (Y/N)")
 	done
 	if [ "$resp" = "N" ]
 	then
