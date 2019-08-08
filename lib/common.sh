@@ -19,7 +19,8 @@ CONNECTION_TIMEOUT=10
 #
 #==========================================================================================
 prompt_char() {
-    echo $1 >&2
+    run_time=$(date +"%Y-%m-%d-%H:%M:%S:")
+    echo $run_time $1 >&2
     read prompt_input
     echo $(echo $prompt_input | tr 'a-z' 'A-Z')
 }
@@ -1327,6 +1328,3 @@ GetTestLog()
 {
     mv test.log ./results/$1/testlog_"$2"
 }
-
-
-

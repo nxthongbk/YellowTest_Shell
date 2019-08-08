@@ -71,11 +71,16 @@ target_setup() {
 	#remove and generate ssh key
 	ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
 
+	# Install .spk
+	echo -e "${COLOR_TITLE}Flash Image${COLOR_RESET}"
+	cat "./firmware/yellow_final_$TARGET_TYPE.spk" | SshToTarget "/legato/systems/current/bin/fwupdate download -" &
+	bgid=$!
+	WaitForDevice "Down" "$rbTimer"
+	WaitForDevice "Up" "$rbTimer"
+	sleep 20
+
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
-
-	# SshToTarget "mkdir -p /tmp/yellow_testing/modules"
-	# SshToTarget "mkdir -p /tmp/yellow_testing/apps"
 	SshToTarget "mkdir -p /tmp/yellow_testing/system"
 
 	# push test script
@@ -83,14 +88,10 @@ target_setup() {
 	ScpToTarget "./configuration.cfg" "/tmp/yellow_testing/"
 	ScpToTarget "./test_scripts/yellow_test.sh" "/tmp/yellow_testing/"
 
-	# push system test
-	echo -e "${COLOR_TITLE}Pushing Legato system${COLOR_RESET}"
-	ScpToTarget "./system/yellow_factory_test.$TARGET_TYPE.update" "/tmp/yellow_testing/system"
-
 	# install system
 	testingSysIndex=$(($(GetCurrentSystemIndex) + 1))
 	echo -e "${COLOR_TITLE}Installing testing system${COLOR_TITLE}"
-	SshToTarget "/legato/systems/current/bin/update /tmp/yellow_testing/system/yellow_factory_test.$TARGET_TYPE.update"
+	cat "./system/yellow_factory_test.$TARGET_TYPE.update" | SshToTarget "/legato/systems/current/bin/update"
 	WaitForSystemToStart $testingSysIndex
 	sleep 10
 
@@ -140,6 +141,13 @@ target_cleanup() {
 	prompt_char "Disconnect from USB then press ENTER"
 	prompt_char "Disconnect battery,Unplug SIM, SD card, IoT card and expansion-connector test board.then press ENTER"
 	prompt_char "Then press ENTER to end testing then press ENTER"
+
+	# Kill flash image process
+	pbgid=$(($bgid + 2))
+	kill $bgid
+	wait $bgid
+	kill -9 $pbgid 
+	#wait $pbgid
 }
 
 write_test_result () {

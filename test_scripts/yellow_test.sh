@@ -11,6 +11,8 @@ echo "MangOH Yellow factory testing"
 #
 #==========================================================================================
 prompt_char() {
+    run_time=$(date +"%Y-%m-%d-%H:%M:%S:")
+    echo $run_time $1 >&2
     echo $1 >&2
     read prompt_input
     echo $(echo $prompt_input | tr 'a-z' 'A-Z')
@@ -731,6 +733,19 @@ test_automation() {
 		echo 'IOTCardReset: FAILED' >&2
 		/legato/systems/current/bin/app stop YellowTest
 		failure_msg='FAILED: Cannot find: "IOTCardReset: PASSED"'
+		test_result="FAILED"
+		return 1
+	fi
+
+	#echo 'Test IOTCardReset"' >&2
+	/sbin/logread | grep "Check UART Loop back: PASSED"
+	if [ $? = 0 ]
+	then
+		echo 'UART LoopBack: PASSED' >&2
+	else
+		echo 'UART LoopBack: FAILED' >&2
+		/legato/systems/current/bin/app stop YellowTest
+		failure_msg='FAILED: Cannot find: "UART Loop back: PASSED"'
 		test_result="FAILED"
 		return 1
 	fi
