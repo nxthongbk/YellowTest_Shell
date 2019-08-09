@@ -72,18 +72,18 @@ target_setup() {
 	ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
 
 	# Install .spk
-	echo -e "${COLOR_TITLE}Flash Image${COLOR_RESET}"
-	cat "./firmware/yellow_final_$TARGET_TYPE.spk" | SshToTarget "/legato/systems/current/bin/fwupdate download -" &
-	bgid=$!
+	# install by swflash is faster than fwupdate download
+	swiflash -m "wp76xx" -i "./firmware/yellow_final_$TARGET_TYPE.spk" 
+	# echo -e "${COLOR_TITLE}Flash Image${COLOR_RESET}"
+	# cat "./firmware/yellow_final_$TARGET_TYPE.spk" | SshToTarget "/legato/systems/current/bin/fwupdate download -" &
+	# bgid=$!
 	WaitForDevice "Down" "$rbTimer"
 	WaitForDevice "Up" "$rbTimer"
-	# Kill flash image process
-	pbgid=$(($bgid + 2))
-	kill $bgid
-	wait $bgid
-	kill -9 $pbgid 
-	
-
+	# # Kill flash image process
+	# pbgid=$(($bgid + 2))
+	# kill $bgid
+	# wait $bgid
+	# kill -9 $pbgid 
 	sleep 10
 
 	# create test folder
@@ -100,7 +100,7 @@ target_setup() {
 	echo -e "${COLOR_TITLE}Installing testing system${COLOR_TITLE}"
 	cat "./system/yellow_factory_test.$TARGET_TYPE.update" | SshToTarget "/legato/systems/current/bin/update"
 	WaitForSystemToStart $testingSysIndex
-	sleep 10
+	sleep 40
 
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
