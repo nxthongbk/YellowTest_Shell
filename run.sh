@@ -77,7 +77,14 @@ target_setup() {
 	bgid=$!
 	WaitForDevice "Down" "$rbTimer"
 	WaitForDevice "Up" "$rbTimer"
-	sleep 20
+	# Kill flash image process
+	pbgid=$(($bgid + 2))
+	kill $bgid
+	wait $bgid
+	kill -9 $pbgid 
+	
+
+	sleep 10
 
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
@@ -142,12 +149,6 @@ target_cleanup() {
 	prompt_char "Disconnect battery,Unplug SIM, SD card, IoT card and expansion-connector test board.then press ENTER"
 	prompt_char "Then press ENTER to end testing then press ENTER"
 
-	# Kill flash image process
-	pbgid=$(($bgid + 2))
-	kill $bgid
-	wait $bgid
-	kill -9 $pbgid 
-	#wait $pbgid
 }
 
 write_test_result () {
