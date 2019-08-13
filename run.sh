@@ -57,7 +57,7 @@ target_setup() {
 	ssh-keygen -R $TARGET_IP 
 
 	#Check connection
-	ScpToTarget "/legato/systems/current/bin/app status"
+	SshToTarget "/legato/systems/current/bin/cm info"
 	
 	# Install .spk
 	# install by swflash is faster than fwupdate download
