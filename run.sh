@@ -1,3 +1,4 @@
+#!/bin/bash
 # Disable colors if stdout is not a tty
 if [ -t 1 ]; then
 	COLOR_TITLE="\\033[1;94m"
@@ -49,12 +50,36 @@ target_setup() {
 		return 1
 	fi
 
+	prompt_char "Connect unit to USB hub (both console and main USB) then press ENTER"
+	WaitForDevice "Up" "$rbTimer"
+
+	#remove and generate ssh key
+	ssh-keygen -R $TARGET_IP 
+
+	#Check connection
+	ScpToTarget "/legato/systems/current/bin/app status"
+	
+	# Install .spk
+	# install by swflash is faster than fwupdate download
+	#swiflash -m "wp76xx" -i "./firmware/yellow_final_$TARGET_TYPE.spk" 
+	echo -e "${COLOR_TITLE}Flash Image${COLOR_RESET}"
+	cat "./firmware/yellow_final_$TARGET_TYPE.spk" | SshToTarget "/legato/systems/current/bin/fwupdate download -" &
+	bgid=$!
+	WaitForDevice "Down" "$rbTimer"
+	WaitForDevice "Up" "$rbTimer"
+	# # Kill flash image process
+	pbgid=$(($bgid + 2))
+	kill $bgid
+	wait $bgid
+	kill -9 $pbgid 
+	sleep 5
+
 	prompt_char "Press Reset button then press ENTER"
 
 	local resp=""
 	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
 	do
-		local resp=$(prompt_char "Confirm hardware-controlled LED is off then goes green? (Y/N)")
+		local resp=$(prompt_char "Confirm hardware-controlled LED goes green? (Y/N)")
 	done
 	if [ "$resp" = "N" ]
 	then
@@ -64,27 +89,7 @@ target_setup() {
 		return 1
 	fi
 
-	prompt_char "Connect unit to USB hub (both console and main USB) then press ENTER"
-
 	WaitForDevice "Up" "$rbTimer"
-
-	#remove and generate ssh key
-	ssh-keygen -f "$HOME/.ssh/known_hosts" -R $TARGET_IP
-
-	# Install .spk
-	# install by swflash is faster than fwupdate download
-	swiflash -m "wp76xx" -i "./firmware/yellow_final_$TARGET_TYPE.spk" 
-	# echo -e "${COLOR_TITLE}Flash Image${COLOR_RESET}"
-	# cat "./firmware/yellow_final_$TARGET_TYPE.spk" | SshToTarget "/legato/systems/current/bin/fwupdate download -" &
-	# bgid=$!
-	WaitForDevice "Down" "$rbTimer"
-	WaitForDevice "Up" "$rbTimer"
-	# # Kill flash image process
-	# pbgid=$(($bgid + 2))
-	# kill $bgid
-	# wait $bgid
-	# kill -9 $pbgid 
-	sleep 10
 
 	# create test folder
 	echo -e "${COLOR_TITLE}Creating testing folder${COLOR_RESET}"
@@ -105,7 +110,7 @@ target_setup() {
 	# start SPI service before install apps
 	SshToTarget "/legato/systems/current/bin/app start spiService"
 
-	run_time=$(date +"%Y-%m-%d-%H:%M")
+	run_time=$(date +"%Y-%m-%d-%H:%M:%S")
 	imei=$(SshToTarget "/legato/systems/current/bin/cm info imei")
 
 	return 0

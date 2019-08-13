@@ -224,6 +224,41 @@ test_buzzer() {
 	return 0
 }
 
+
+#=== FUNCTION ==================================================================
+#
+#        NAME: test_reset
+# DESCRIPTION: Test the reset button
+#   PARAMETER: None
+#
+#   RETURNS 1: PASSED/FAILED
+#   RETURNS 2: Failure message
+#
+#===============================================================================
+test_reset() {
+	# Press button and listen for buzzer;
+	# start background function
+	prompt_char "Press reset button then press ENTER"
+
+	local resp=""
+	while [ "$resp" != "Y" ] && [ "$resp" != "N" ]
+	do
+		local resp=$(prompt_char "Confirm hardware-controlled LED goes green (Y/N)")
+	done
+	if [ "$resp" = "N" ]
+	then
+		echo "Reset Button has problem." >&2
+		failure_msg="Reset Button has problem"
+		test_result="FAILED"
+		return 1
+	fi
+
+	failure_msg=""
+	
+	return 0
+	
+}
+
 #=== FUNCTION ==================================================================
 #
 #        NAME: ButtonMonitor
@@ -479,6 +514,8 @@ yellowTest_WifiScan() {
 	return 0
 }
 
+
+
 #=== FUNCTION ==================================================================
 #
 #        NAME: yellowTest_uSD
@@ -541,6 +578,54 @@ yellowTest_uSD() {
 	return 0
 }
 
+#=== FUNCTION ==================================================================
+#
+#        NAME: yellowTest_USB
+# DESCRIPTION: Test Read USB
+#   PARAMETER: None
+#
+#   RETURNS 1: PASSED/FAILED
+#   RETURNS 2: Failure message
+#
+#===============================================================================
+yellowTest_USB() {
+	
+	if [ -d "/sys/devices/7c00000.hsic_host/usb1/1-1/1-1.1" ]
+	then
+		echo "USB device 1-1.1 exist" >&2
+	else
+		echo "USB device 1-1.1 doesn't exist" >&2
+		return 1
+	fi
+
+	if [ -d "/sys/devices/7c00000.hsic_host/usb1/1-1/1-1.2" ]
+	then
+		echo "USB device 1-1.2 exist" >&2
+	else
+		echo "USB device 1-1.2 doesn't exist" >&2
+		return 1
+	fi
+
+	if [ -d "/sys/devices/7c00000.hsic_host/usb1/1-1/1-1.3" ]
+	then
+		echo "USB device 1-1.3 exist" >&2
+	else
+		echo "USB device 1-1.3 doesn't exist" >&2
+		return 1
+	fi
+
+	if [ -d "/sys/devices/7c00000.hsic_host/usb1/1-1/1-1:1.0" ]
+	then
+		echo "USB device 1-1:1.0 exist" >&2
+	else
+		echo "USB device 1-1:1.0 doesn't exist" >&2
+		return 1
+	fi
+	
+
+	failure_msg=""
+	return 0
+}
 
 #=== FUNCTION ==================================================================
 #
@@ -873,12 +958,7 @@ echo '======================================================================='
 #     (On-board test software should verify that the correct string has been written to the NFC tag.)
 # 20. Confirm software-controlled tri-colour LED has changed to white;
 # 21. Confirm hardware-controlled LED is yellow;
-# 22. Press reset button;
-# 23. Confirm hardware-controlled LED goes green;
-# 24. Remove power jumper;
-# 25. Disconnect from USB;
-# 26. Disconnect battery;
-# 27. Unplug SIM, SD card, IoT card and expansion-connector test board.
+
 echo "=== yellowManualTest_final ==="
 yellowManualTest_final
 if [ $? != 0 ]
@@ -891,6 +971,14 @@ else
 fi
 echo '======================================================================='
 
+# 22. Press reset button;
+# 23. Confirm hardware-controlled LED goes green;
+# 24. Remove power jumper;
+# 25. Disconnect from USB;
+# 26. Disconnect battery;
+# 27. Unplug SIM, SD card, IoT card and expansion-connector test board.
+
+# WaitForDevice "Up" "$rbTimer"
 
 # automation test
 # Wifi Test
@@ -907,6 +995,21 @@ fi
 echo '======================================================================='
 
 # uSD Test
+# USB Test
+
+echo "=== Start USB testing ==="
+yellowTest_USB
+if [ $? != 0 ]
+then
+	fail_count=$(($fail_count + 1))
+	echo "----->               FAILURE           <-----"
+	echo "$failure_msg"
+else
+	echo "$test_result"
+fi
+echo '======================================================================='
+
+#Automation test
 echo "=== Start automation testing ==="
 test_automation
 if [ $? != 0 ]
