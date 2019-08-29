@@ -181,6 +181,11 @@ buzzer_set() {
 		then
 			echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/8-0051/clkout_freq"
 		fi
+		
+		if [ "$TARGET_TYPE" = "wp77xx" ]
+		then
+			echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/8-0051/clkout_freq"
+		fi
 	fi
 }
 
@@ -514,6 +519,42 @@ yellowTest_WifiScan() {
 	return 0
 }
 
+#=== FUNCTION ==================================================================
+#
+#        NAME: yellowTest_BluetoothScan
+# DESCRIPTION: Scan Bluetooth and see dedicated device
+#   PARAMETER: None
+#
+#   RETURNS 1: PASSED/FAILED
+#   RETURNS 2: Failure message
+#
+#===============================================================================
+yellowTest_BluetoothScan() {
+	
+	/usr/bin/hciconfig hci0 up >&2
+	if [ $? = 0 ]
+	then
+		echo 'start Bluettooth successflly' >&2
+	else
+		echo 'Unable to start Bluettooth' >&2
+		return 1
+	fi
+
+	sleep 5
+
+	/usr/bin/hcitool scan | grep "$BLUETOOTH_DEVICE" >&2
+	sleep 5
+	if [ $? = 0 ]
+	then
+		echo "Able to find Bluettooth device $BLUETOOTH_DEVICE" >&2
+	else
+		echo "Unable to find Bluettooth device $BLUETOOTH_DEVICE" >&2
+		return 1
+	fi
+
+	failure_msg=""
+	return 0
+}
 
 
 #=== FUNCTION ==================================================================
@@ -984,6 +1025,19 @@ echo '======================================================================='
 # Wifi Test
 echo "=== Start Wifi testing ==="
 yellowTest_WifiScan
+if [ $? != 0 ]
+then
+	fail_count=$(($fail_count + 1))
+	echo "----->               FAILURE           <-----"
+	echo "$failure_msg"
+else
+	echo "$test_result"
+fi
+echo '======================================================================='
+
+# Bluetooth Test
+echo "=== Start Bluetooth testing ==="
+yellowTest_BluetoothScan
 if [ $? != 0 ]
 then
 	fail_count=$(($fail_count + 1))
