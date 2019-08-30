@@ -176,17 +176,18 @@ buzzer_set() {
 	if [ "$TARGET_TYPE" = "wp85" ]
 	then
 		echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/4-0051/clkout_freq"
-	else
-		if [ "$TARGET_TYPE" = "wp76xx" ]
-		then
-			echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/8-0051/clkout_freq"
-		fi
-		
-		if [ "$TARGET_TYPE" = "wp77xx" ]
-		then
-			echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/8-0051/clkout_freq"
-		fi
 	fi
+	
+	if [ "$TARGET_TYPE" = "wp76xx" ]
+	then
+		echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/8-0051/clkout_freq"
+	fi
+		
+	if [ "$TARGET_TYPE" = "wp77xx" ]
+	then
+		echo "$1" > "/sys/bus/i2c/drivers/rtc-pcf85063/8-0051/clkout_freq"
+	fi
+	
 }
 
 #=== FUNCTION ==================================================================
@@ -416,11 +417,17 @@ write_eeprom() {
 	if [ "$TARGET_TYPE" = "wp85" ]
 	then
 		local eeprom_path="/sys/bus/i2c/devices/0-0050/eeprom"
-	else
-		if [ "$TARGET_TYPE" = "wp76xx" ]
-		then
-			local eeprom_path="/sys/bus/i2c/devices/4-0050/eeprom"
-		fi
+	fi
+
+	if [ "$TARGET_TYPE" = "wp76xx" ]
+	then
+		local eeprom_path="/sys/bus/i2c/devices/4-0050/eeprom"
+	
+	fi
+
+	if [ "$TARGET_TYPE" = "wp77xx" ]
+	then
+		local eeprom_path="/sys/bus/i2c/devices/4-0050/eeprom"
 	fi
 
 	# msg="mangOH Yellow\\nRev: 1.0\\nDate: $time_str\\nMfg: Talon Communications\\0"
@@ -498,7 +505,7 @@ yellowTest_WifiScan() {
 	/legato/systems/current/bin/wifi client start >&2
 	if [ $? = 0 ]
 	then
-		echo 'start wifi successflly' >&2
+		echo 'Start wifi successfully' >&2
 	else
 		echo 'Unable to start wifi' >&2
 		return 1
@@ -534,7 +541,7 @@ yellowTest_BluetoothScan() {
 	/usr/bin/hciconfig hci0 up >&2
 	if [ $? = 0 ]
 	then
-		echo 'start Bluettooth successflly' >&2
+		echo 'Start Bluettooth successfully' >&2
 	else
 		echo 'Unable to start Bluettooth' >&2
 		return 1
@@ -663,7 +670,6 @@ yellowTest_USB() {
 		return 1
 	fi
 	
-
 	failure_msg=""
 	return 0
 }
@@ -683,7 +689,7 @@ yellowTest_I2CDetect() {
 	/legato/systems/current/bin/legato stop
 	if [ $? = 0 ]
 	then
-		echo 'Stop Legato successflly' >&2
+		echo 'Stop Legato successfully' >&2
 	else
 		echo 'Unable to stop Legato' >&2
 		return 1
